@@ -1,0 +1,6 @@
+Notes: With decreasing sampling frequency, non heated rooms become more pessimistic.This error is the error of
+sampling. We recommend to include in the formulation problem different simulation and optimisation frequencies.
+In specific, one could include subsimulation constraints so that the simulation runs at Ts points but
+only n_o*Ts point is interesting for optimisation quantities. Notice that in this case:
+n_o = number of simulating units -> quantity taken for optimisation purposes
+Ts -> simulating units (always smaller or equal than the optimisation units)
