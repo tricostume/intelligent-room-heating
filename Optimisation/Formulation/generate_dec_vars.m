@@ -21,7 +21,7 @@
 %--------------------------------------------------------------------------
 
 dec_vars = {};
-% xd,r
+%% xd,r
 for i = 1:size(Rdn,1)
    for j = 1:size(Rdn,2)
        if Rdn(i,j) == 1
@@ -36,10 +36,10 @@ end
 dec_vars_x_dr = dec_vars;
 n_xdr = size(dec_vars,2);
 
-% zi,t
+%% zi,t <<<<<<<<<<<------------------------ NOTICE TO CHANGE FOR BIG HOTEL
 periods = [];
 zit = [];
-for j = 1:size(Rd,2) %room
+ for j = 1:size(Rd,2) %room
    for i = 1:size(Rd,1) %request
        if Rd(i,j) == 1
        periods = [periods; input_requests(i,4:5)];
@@ -53,11 +53,18 @@ for j = 1:size(Rd,2) %room
        end
    end
    periods = [];
-end
+ end
+
+ % For energy problem, need corridors and service areas also
+ for i=1:hotel.ns % number of service rooms
+     for k =1:size(zit,2) % time
+         dec_vars = [dec_vars, ['z' num2str(j-1+i) '_' num2str(k) '_']];
+     end
+ end
 dec_vars_z_it = dec_vars(n_xdr+1:end);
 n_zit = size(dec_vars,2)-n_xdr;
 
-% Generate simulating binary control commands in finer grid ris
+%% Generate simulating binary control commands in finer grid ris
 % for i=1:size(zit,1) % rooms
 %    for j=1:size(zit,2) % time
 %        if zit(i,j) == 1 % 
@@ -71,21 +78,32 @@ n_zit = size(dec_vars,2)-n_xdr;
 % dec_vars_r_is = dec_vars(n_xdr+n_zit+1:end);
 % n_ris = size(dec_vars,2)-n_xdr-n_zit;
 
-% Initial temperature states
-for i=1:size(input_rooms,1)
+%% Initial temperature states <<<<<<----- CHANGE FOR BIG HOTEL
+%for i=1:size(input_rooms,1)
+for i=1:hotel.nt
     dec_vars = [dec_vars, ['T' num2str(i-1) '_1_']];
 end
-dec_vars_Ti1 = dec_vars(n_xdr+n_zit+n_ris+1:end);
-n_Ti1 = size(dec_vars,2)-n_xdr-n_zit-n_ris;
+dec_vars_Ti1 = dec_vars(n_xdr+n_zit+1:end);
+n_Ti1 = size(dec_vars,2)-n_xdr-n_zit;
 
-% Furthter temperature states in refined simulation grid s
-for i= 1:size(ris,1) % rooms
-   for j=1:size(ris,2) % grid s
+% % Furthter temperature states in refined simulation grid s
+% for i= 1:size(ris,1) % rooms
+%    for j=1:size(ris,2) % grid s
+%        dec_vars = [dec_vars, ['T' num2str(i-1) '_' num2str(j) '_']];
+%    end
+% end
+% dec_vars_Tis = dec_vars(n_xdr+n_zit+n_ris+n_Ti1+1:end);
+% n_Tis = size(dec_vars,2)-n_xdr-n_zit-n_ris-n_Ti1;
+
+%% Furthter temperature states in time t Tit <<<<<---- CHANGE FOR BIG HOTEL
+%for i= 1:size(Rd,2) % rooms
+for j=2:size(zit,2)+1 % time
+   for  i= 1:hotel.nt % rooms
        dec_vars = [dec_vars, ['T' num2str(i-1) '_' num2str(j) '_']];
    end
 end
-dec_vars_Tis = dec_vars(n_xdr+n_zit+n_ris+n_Ti1+1:end);
-n_Tis = size(dec_vars,2)-n_xdr-n_zit-n_ris-n_Ti1;
+dec_vars_Tit = dec_vars(n_xdr+n_zit+n_Ti1+1:end);
+n_Tit = size(dec_vars,2)-n_xdr-n_zit-n_Ti1;
 
 % % Initial integral states
 % for i=1:size(input_rooms,1)
@@ -103,14 +121,33 @@ n_Tis = size(dec_vars,2)-n_xdr-n_zit-n_ris-n_Ti1;
 % dec_vars_eis = dec_vars(n_xdr+n_zit+n_ris+n_Ti1+n_Tis+n_ei1+1:end);
 % n_eis = size(dec_vars,2)-n_xdr-n_zit-n_ris-n_Ti1-n_Tis-n_ei1;
 
-% Control decision variables
-for i= 1:size(ris,1) % rooms
-   for j=1:size(ris,2) % grid s
-       dec_vars = [dec_vars, ['u' num2str(i-1) '_' num2str(j) '_'],...
-                             ['uc' num2str(i-1) '_' num2str(j) '_'],...
-                             ['ui' num2str(i-1) '_' num2str(j) '_']];
+% % Control decision variables
+% for i= 1:size(ris,1) % rooms
+%    for j=1:size(ris,2) % grid s
+%        dec_vars = [dec_vars, ['u' num2str(i-1) '_' num2str(j) '_'],...
+%                              ['uc' num2str(i-1) '_' num2str(j) '_'],...
+%                              ['ui' num2str(i-1) '_' num2str(j) '_']];
+%    end
+% end
+% dec_vars_controls = dec_vars(n_xdr+n_zit+n_ris+n_Ti1+n_Tis+n_ei1+n_eis+1:end);
+% n_controls = size(dec_vars,2)-n_xdr-n_zit-n_ris-n_Ti1-n_Tis-n_ei1-n_eis;
+
+%% Control decision variables <<<<<----- CHANGE FOR BIG HOTEL
+%for i= 1:size(Rdn,2) % rooms
+for i= 1:hotel.nt % rooms
+   for j=1:size(zit,2) % time
+       dec_vars = [dec_vars, ['u' num2str(i-1) '_' num2str(j) '_']];
    end
 end
-dec_vars_controls = dec_vars(n_xdr+n_zit+n_ris+n_Ti1+n_Tis+n_ei1+n_eis+1:end);
-n_controls = size(dec_vars,2)-n_xdr-n_zit-n_ris-n_Ti1-n_Tis-n_ei1-n_eis;
+dec_vars_controls = dec_vars(n_xdr+n_zit+n_Ti1+n_Tit+1:end);
+n_controls = size(dec_vars,2)-n_xdr-n_zit-n_Ti1-n_Tit;
 
+
+% % Input fluxes qr,t
+% for i= 1:size(Rd,2) % rooms
+%    for j=1:size(zit,2) % grid s
+%        dec_vars = [dec_vars, ['qu' num2str(i-1) '_' num2str(j) '_']];
+%    end
+% end
+% dec_vars_controls = dec_vars(n_xdr+n_zit+n_Ti1+n_Tit+1:end);
+% n_controls = size(dec_vars,2)-n_xdr-n_zit-n_Ti1-n_Tit;

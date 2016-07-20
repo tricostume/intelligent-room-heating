@@ -13,9 +13,9 @@
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 % Number of client rooms, service rooms and dummy rooms
-load('input_rooms.mat');
+load('input_rooms_small_hotel.mat');
 nc = size(input_rooms,1);
-ns = 0;
+ns = 2;
 nn = 1;
 % Total number of rooms
 nt = nc+ns+nn;

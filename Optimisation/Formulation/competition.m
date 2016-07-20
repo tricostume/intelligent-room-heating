@@ -14,10 +14,10 @@ for i = 1:size(input_requests,1)
                             input_requests(j,5)) == 1
                         
                         
-                        input_requests(i,4)
-                        input_requests(i,5)
-                        input_requests(j,4)
-                        input_requests(j,5)
+                        %input_requests(i,4)
+                        %input_requests(i,5)
+                        %input_requests(j,4)
+                        %input_requests(j,5)
                         
                         d1 = input_requests(i,1:3);
                         d2 = input_requests(j,1:3);
