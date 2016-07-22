@@ -77,6 +77,7 @@ for i=1:size(Rd,2) % rooms
             if temp(l,k) == 1
                 Ix2 = fiix(dec_vars,['x' num2str(l-1) '_' num2str(i-1) '_']);
                 A_row(Ix2) = -1;
+                disp(l);
             end
         end
         A = [A; A_row];
@@ -208,6 +209,26 @@ n_const6 = size(A,1)-n_const1-n_const2-n_const3-n_const4-n_const5;
 % Fill in respective b vector
 b = [b;(Tsp-M)*ones(n_const6,1)];
 
+% Control of corridors and common areas (lounges)
+A_row = zeros(1,size(dec_vars,2));
+
+for k=10:11 % service rooms
+    for i=1:size(zit,2) % time
+        for j=1:size(zit,1)% room
+        % Corridor small hotel   
+            Ix1 = fiix(dec_vars,['z' num2str(k) '_' num2str(i) '_']);
+             Ix2 = fiix(dec_vars,['z' num2str(j-1) '_' num2str(i) '_']);
+             A_row(Ix1) = 1;
+             A_row(Ix2) = -M;
+             A = [A; A_row];
+             A_row = zeros(1,size(dec_vars,2));
+        end
+    end
+end
+n_const7 = size(A,1)-n_const1-n_const2-n_const3-n_const4-n_const5-n_const6;
+% Fill in respective b vector
+b = [b;(1-M)*ones(n_const7,1)];
+
 %% Initial temperature states Ti0
 A_row = zeros(1,size(dec_vars,2));
 for i=1:hotel.nt
@@ -217,7 +238,7 @@ for i=1:hotel.nt
     b = [b;T_rooms_0(i)];
     A_row = zeros(1,size(dec_vars,2));
 end
-n_const7 = size(A,1)-n_const1-n_const2-n_const3-n_const4-n_const5-n_const6; 
+n_const8 = size(A,1)-n_const1-n_const2-n_const3-n_const4-n_const5-n_const6-n_const7; 
 
 %% Yield at least optimal yield found before
 % Profit assigning request d to room r

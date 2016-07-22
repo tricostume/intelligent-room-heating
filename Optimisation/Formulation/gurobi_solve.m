@@ -22,7 +22,7 @@ clear params;
 params.outputflag = 1;
 params.LogFile = Log_file;
 params.resultfile = Result_file;
-%params.timelimit = inf;
+params.timelimit = 200;
 result = gurobi(model, params);
 disp(result)
 % for v=1:length(dec_vars)

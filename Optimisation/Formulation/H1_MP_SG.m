@@ -12,7 +12,18 @@
 clc;
 clearvars -except hotel_count instance_number solutions_number folder;
 %% Read input file in and declare needed variables
-load('input_requests_small_hotel.mat');
+name_change = 30;
+if instance_number == 11
+    name_change = 50;
+elseif instance_number == 21
+    name_change = 65;
+end
+load(['demand_small_hotel\demand_small_' num2str(name_change) '_' num2str(instance_number) '.mat']);
+
+input_requests = demand_matrix;
+clearvars -except hotel_count instance_number solutions_number folder input_requests;
+
+%load('input_requests_small_hotel.mat');
 nd = size(input_requests,1);
 D = {};
 R = {};
@@ -103,7 +114,6 @@ for i = 1:size(Rdn,1) % request
                         Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                         Revenue(Ix1) = Profit(3,3)*(input_requests(i,5)-input_requests(i,4));
                    elseif str2num(type2str(input_rooms(j,:))) == 123
-                       disp('There is a bug in the code! Check Profit'); 
                        Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                        Revenue(Ix1) = Profit(3,2)*(input_requests(i,5)-input_requests(i,4)); 
                    end
@@ -121,8 +131,8 @@ generate_constraints_Revenue_SG;
 %% Set up objective function
 % Prepare constraints sense string 
 sense = [repmat('=',n_const1,1);...
-         repmat('<',n_const2,1);
-         '>';
+         repmat('<',n_const2,1);...
+         '>';...
          repmat('<',solutions_number-1,1)]; % Revenue constraint
      
 % Variable types

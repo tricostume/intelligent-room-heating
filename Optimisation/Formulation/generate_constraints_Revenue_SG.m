@@ -21,6 +21,7 @@ for i=1:size(Rdn,1) % requests
             else
                 Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1) '_']);
                 A_row(Ix1) = 1;
+                disp(i);
             end
         end
     end
@@ -33,6 +34,9 @@ b = ones(n_const1,1);
 
 %% Avoidance of ties
 A_row = zeros(1,size(dec_vars,2));
+A_temp = zeros(43200,size(dec_vars,2));
+index=1;
+
 for i=1:size(Dd,1) % actual request
     for j=1:size(Dd,2) % competing requests
         if Dd(i,j) == 1
@@ -44,7 +48,10 @@ for i=1:size(Dd,1) % actual request
                         Ix2 = fiix(dec_vars,['x' num2str(j-1) '_' num2str(k-1) '_']);
                         A_row(Ix1) = 1;
                         A_row(Ix2) = 1;
-                        A = [A; A_row];
+                        %A = [A; A_row];
+                        A_temp(index,:) = A_row;
+                        index = index+1;
+                        disp([num2str(i) '-' num2str(j) '-' num2str(k) '-' num2str(index)])
                     end
                     A_row = zeros(1,size(dec_vars,2));
                 end
@@ -52,6 +59,8 @@ for i=1:size(Dd,1) % actual request
         end
     end   
 end
+A_temp = A_temp(1:index,:);
+A= [A; A_temp];
 n_const2 = size(A,1)-n_const1;
 
 % Fill in respective b vector
@@ -109,7 +118,6 @@ for i = 1:size(Rdn,1) % request
                         Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                         Revenue(Ix1) = Profit(3,3)*(input_requests(i,5)-input_requests(i,4));
                    elseif str2num(type2str(input_rooms(j,:))) == 123
-                       disp('There is a bug in the code! Check Profit'); 
                        Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                        Revenue(Ix1) = Profit(3,2)*(input_requests(i,5)-input_requests(i,4)); 
                    end

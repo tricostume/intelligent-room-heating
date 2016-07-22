@@ -13,7 +13,17 @@
 clc;
 clearvars -except hotel_count instance_number solutions_number folder;
 %% Read input file in and declare needed variables
-load('input_requests_small_hotel.mat');
+name_change = 30;
+if instance_number == 11
+    name_change = 50;
+elseif instance_number == 21
+    name_change = 65;
+end
+load(['demand_small_hotel\demand_small_' num2str(name_change) '_' num2str(instance_number) '.mat']);
+
+input_requests = demand_matrix;
+clearvars -except hotel_count instance_number solutions_number folder input_requests;
+%load('input_requests_small_hotel.mat');
 nd = size(input_requests,1);
 D = {};
 R = {};
@@ -41,7 +51,7 @@ Rdn = [Rd, ones(size(Rd,1),1)];
 Dd = competition (input_requests);
 %% Definition of constant parameters
 s = 24; % Refining factor of the simulation grid
-M = 100;
+M = 1000;
 Tsp = 20; % Temperature to be reached when a room is activated
 Ts = 3600*24; % For parameter adequation, write sampling time in the form
              % 3600* num hours.
@@ -73,7 +83,8 @@ sense = [repmat('=',n_const1,1);...
          repmat('=',n_const4,1);...
          repmat('>',n_const5,1);...
          repmat('>',n_const6,1);...
-         repmat('=',n_const7,1);
+         repmat('>',n_const7,1);...
+         repmat('=',n_const8,1);
          '>']; % Revenue constraint
      
 % Variable types
@@ -100,8 +111,9 @@ for j=1:solutions_number-1
     end
         lb = zeros(1,size(dec_vars,2));
         lb(1:n_xdr) = result.x;
-        ub = inf(1,size(dec_vars,2));
+        ub = inf(1,size(dec_vars,2)); 
         ub(1:n_xdr) = result.x;
+
 end
 
 % Name result file

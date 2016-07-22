@@ -10,7 +10,16 @@
 clc;
 clearvars -except hotel_count instance_number solutions_number folder;
 %% Read input file in and declare needed variables
-load('input_requests_small_hotel.mat');
+name_change = 30;
+if instance_number == 11
+    name_change = 50;
+elseif instance_number == 21
+    name_change = 65;
+end
+load(['demand_small_hotel\demand_small_' num2str(name_change) '_' num2str(instance_number) '.mat']);
+input_requests = demand_matrix;
+clearvars -except hotel_count instance_number solutions_number folder input_requests;
+%load('input_requests_small_hotel.mat');
 nd = size(input_requests,1);
 D = {};
 R = {};
@@ -70,7 +79,8 @@ sense = [repmat('=',n_const1,1);...
          repmat('=',n_const4,1);...
          repmat('>',n_const5,1);...
          repmat('>',n_const6,1);...
-         repmat('=',n_const7,1);
+         repmat('>',n_const7,1);...
+         repmat('=',n_const8,1);...
          '>']; % Revenue constraint
      
 % Variable types
