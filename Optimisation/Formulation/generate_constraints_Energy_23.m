@@ -33,6 +33,9 @@ b = ones(n_const1,1);
 
 %% Avoidance of ties
 A_row = zeros(1,size(dec_vars,2));
+A_temp = zeros(30000,size(dec_vars,2));
+index = 1;
+
 for i=1:size(Dd,1) % actual request
     for j=1:size(Dd,2) % competing requests
         if Dd(i,j) == 1
@@ -44,7 +47,9 @@ for i=1:size(Dd,1) % actual request
                         Ix2 = fiix(dec_vars,['x' num2str(j-1) '_' num2str(k-1) '_']);
                         A_row(Ix1) = 1;
                         A_row(Ix2) = 1;
-                        A = [A; A_row];
+                        %A = [A; A_row];
+                        A_temp(index,:) = A_row;
+                        index = index+1;
                     end
                     A_row = zeros(1,size(dec_vars,2));
                 end
@@ -52,6 +57,9 @@ for i=1:size(Dd,1) % actual request
         end
     end   
 end
+
+A_temp = A_temp(1:index,:);
+A = [A;A_temp];
 n_const2 = size(A,1)-n_const1;
 
 % Fill in respective b vector
@@ -59,6 +67,8 @@ b = [b;ones(n_const2,1)];
 %% Activation of rooms in time
 A_row = zeros(1,size(dec_vars,2));
 temp = [];
+A_temp =zeros(30000,size(dec_vars,2));
+index=1;
 for i=1:size(Rd,2) % rooms
     temp = [];
     for j=1:size(Rd,1) % requests
@@ -80,10 +90,15 @@ for i=1:size(Rd,2) % rooms
                 disp(l);
             end
         end
-        A = [A; A_row];
+        %A = [A; A_row];
+        A_temp(index,:) = A_row;
+        index = index+1;
         A_row = zeros(1,size(dec_vars,2));
     end
 end
+
+A_temp = A_temp(1:index,:);
+A = [A; A_temp];
 n_const3 = size(A,1)-n_const1-n_const2;
 
 % Fill in respective b vector
@@ -109,14 +124,21 @@ b = [b;zeros(n_const3,1)];
 % n_ris = size(dec_vars,2)-n_xdr-n_zit;
 
 %% Physical model constraints
+% NOTICE: Until this version, node "e" must always appear before node "g"
+% and the K parameters must appear in order, this meaning first all K_0_i
+% then K_1_i and so on.
+
 A_temp = zeros(hotel.nt,size(A,2));
 A_temp2 = [];
 % Fill in respective b vector parallely
-read_in_data = csvread('MyDesign_EnergyUse_comp.csv',1,1);
-step = ceil(Ts/3600);
-qS = read_in_data(1:step:size(zit,2)*step,6:6:end)';
-Te = read_in_data(1:step:size(zit,2)*step,1);
-T_rooms_0 = read_in_data(1,2:6:end)';
+%read_in_data = csvread('MyDesign_EnergyUse_comp.csv',1,1);
+step_ = ceil(Ts/3600);
+qS = hotel.q_sun_room(:,1:step_:size(zit,2)*step_);
+Te = hotel.ext_adj.temp(1:step_:size(zit,2)*step_,:);
+Tg = hotel.ground_adj.temp(1:step_:size(zit,2)*step_,:);
+T_rooms_0 = 17*ones(26,1);
+%b_temp = zeros(hotel.nt*(size(zit,2)+1),1);
+b_temp = [];
 
 for i=1:size(zit,2) % time
     for j=1:size(hotel.parameters.K.names,1) %transmitances
@@ -130,6 +152,7 @@ for i=1:size(zit,2) % time
             Ix4 = fiix(hotel.parameters.c.names,['c_' num2str(Ix1) '_']); 
             A_temp(Ix1+1,Ix3) = hotel.parameters.K.values(j)/hotel.parameters.c.values(Ix4);
             b = [b;(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4)];
+            %b_temp = [b_temp;(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4)];
         end
         if strcmp(Ix1,'u')
             Ix2 = str2double(Ix2);
@@ -137,7 +160,15 @@ for i=1:size(zit,2) % time
             Ix4 = fiix(hotel.parameters.c.names,['c_' num2str(Ix2) '_']); 
             A_temp(Ix2+1,Ix3) = -hotel.parameters.K.values(j)/hotel.parameters.c.values(Ix4);
         end
-        if ~strcmp(Ix2,'e') && ~strcmp(Ix1,'u')
+        if strcmp(Ix2,'g')
+            Ix1 = str2double(Ix1);
+            Ix3 = fiix(dec_vars,['T' num2str(Ix1) '_' num2str(i) '_']);
+            Ix4 = fiix(hotel.parameters.c.names,['c_' num2str(Ix1) '_']); 
+            A_temp(Ix1+1,Ix3) = A_temp(Ix1+1,Ix3)+hotel.parameters.K.values(j)/hotel.parameters.c.values(Ix4);
+            b(end) = b(end)+(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4);
+            %b_temp(end) = b_temp(end)+(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4);;
+        end
+        if ~strcmp(Ix2,'e') && ~strcmp(Ix1,'u') && ~strcmp(Ix2,'g')
             Ix1 = str2double(Ix1);
             Ix2 = str2double(Ix2);           
             % look for Tr1,t
@@ -171,19 +202,23 @@ end
 A = [A;A_temp2];
 n_const4 = size(A,1)-n_const1-n_const2-n_const3;
 
-
 %% Control constraints (proportional) <<<<<<--- CHANGE FOR BIG HOTEL
 % Positivity
 A_row = zeros(1,size(dec_vars,2));
-
+A_temp = zeros(30000,size(dec_vars,2));
+index=1;
   for i=1:size(zit,2)%time
      for j=1:hotel.nt %room
          Ix1 = fiix(dec_vars,['u' num2str(j-1) '_' num2str(i) '_']);
          A_row(Ix1) = 1;
-         A = [A; A_row];
+         %A = [A; A_row];
+         A_temp(index,:) = A_row;
+         index = index+1;
          A_row = zeros(1,size(dec_vars,2));
      end
   end
+  A_temp = A_temp(1:index,:);
+  A=[A; A_temp];
 n_const5 = size(A,1)-n_const1-n_const2-n_const3-n_const4; 
 % Fill in respective b vector
 b = [b;zeros(n_const5,1)];
@@ -211,8 +246,9 @@ b = [b;(Tsp-M)*ones(n_const6,1)];
 
 % Control of corridors and common areas (lounges)
 A_row = zeros(1,size(dec_vars,2));
-
-for k=10:11 % service rooms
+A_temp = zeros(30000, size(dec_vars,2));
+index=1;
+for k=23:25 % service rooms
     for i=1:size(zit,2) % time
         for j=1:size(zit,1)% room
         % Corridor small hotel   
@@ -220,11 +256,15 @@ for k=10:11 % service rooms
              Ix2 = fiix(dec_vars,['z' num2str(j-1) '_' num2str(i) '_']);
              A_row(Ix1) = 1;
              A_row(Ix2) = -M;
-             A = [A; A_row];
+             %A = [A; A_row];
+             A_temp(index,:) = A_row;
+             index = index+1;
              A_row = zeros(1,size(dec_vars,2));
         end
     end
 end
+  A_temp = A_temp(1:index,:);
+  A=[A; A_temp];
 n_const7 = size(A,1)-n_const1-n_const2-n_const3-n_const4-n_const5-n_const6;
 % Fill in respective b vector
 b = [b;(1-M)*ones(n_const7,1)];
@@ -292,7 +332,6 @@ for i = 1:size(Rdn,1) % request
                         Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                         Revenue(Ix1) = Profit(3,3)*(input_requests(i,5)-input_requests(i,4));
                    elseif str2num(type2str(input_rooms(j,:))) == 123
-                       disp('There is a bug in the code! Check Profit'); 
                        Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                        Revenue(Ix1) = Profit(3,2)*(input_requests(i,5)-input_requests(i,4)); 
                    end
