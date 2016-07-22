@@ -7,8 +7,7 @@
 %Script: Preparation of matrices and parameters for Gurobi to work
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
-clc;
-clearvars -except hotel_count instance_number solutions_number folder;
+clc;clear;
 %% Read input file in and declare needed variables
 load('input_requests_small_hotel.mat');
 nd = size(input_requests,1);
@@ -88,16 +87,10 @@ modelsense = 'min';
 Objective = Energy_Consumption;
 
 % Name result file
-Result_file=[folder '\Results' num2str(instance_number) 'E_Sol' num2str(solutions_number) '.lp'];
-Log_file =[folder '\Log_H' num2str(hotel_count) 'E' num2str(instance_number) 'Sol' num2str(solutions_number) '.txt'];
-
+Result_file='Results.lp';
 %% Run Gurobi
 gurobi_solve;
-save([folder 'H' num2str(hotel_count) '_OPT_E' num2str(instance_number) '_Sol' num2str(solutions_number-1)]); % Save workspace
-save([folder 'H' num2str(hotel_count) '_OPT_E_Y' num2str(instance_number) '_Sol' num2str(solutions_number-1)],'result'); % Result matrix
-
      
-              
      
      
 

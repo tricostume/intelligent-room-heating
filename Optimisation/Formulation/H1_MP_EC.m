@@ -1,10 +1,13 @@
 %--------------------Università degli Studi di Genova----------------------
 %_________________________________EMARO+___________________________________
-%Title: Matrix_preparation H1_MP_E
-% Hotel 1... Matrix Preparation ... Energy Formulation (after yield)
+%Title: Matrix_preparation H1_MP_EC
+% Hotel 1... Matrix Preparation ... Energy Calculator (after yield and 
+% given already some solution decision variables)
 %Period of preparation: 
 %Authors: Ernesto Denicia, Emmanuele Vestito
-%Script: Preparation of matrices and parameters for Gurobi to work
+%Script: Preparation of matrices and parameters for Gurobi to work Upper
+%and lowe bounds are put on assignment decision variables to allow Gurobi
+%only calculate the energy consumption result.
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 clc;
@@ -87,17 +90,32 @@ modelsense = 'min';
 % Pass objective function
 Objective = Energy_Consumption;
 
+% Lower and upper bounds for energy calculation
+
+for j=1:solutions_number-1
+    if j == 1
+
+    else
+        load([folder 'H' num2str(hotel_count) '_OPT_SG_Y' num2str(instance_number) '_Sol' num2str(j) '.mat']);
+    end
+        lb = zeros(1,size(dec_vars,2));
+        lb(1:n_xdr) = result.x;
+        ub = inf(1,size(dec_vars,2));
+        ub(1:n_xdr) = result.x;
+end
+
 % Name result file
-Result_file=[folder '\Results' num2str(instance_number) 'E_Sol' num2str(solutions_number) '.lp'];
-Log_file =[folder '\Log_H' num2str(hotel_count) 'E' num2str(instance_number) 'Sol' num2str(solutions_number) '.txt'];
+Result_file=[folder '\Results' num2str(instance_number) 'EC_Sol' num2str(solutions_number) '.lp'];
+Log_file =[folder '\Log_H' num2str(hotel_count) 'EC' num2str(instance_number) 'Sol' num2str(solutions_number) '.txt'];
+
 
 %% Run Gurobi
-gurobi_solve;
-save([folder 'H' num2str(hotel_count) '_OPT_E' num2str(instance_number) '_Sol' num2str(solutions_number-1)]); % Save workspace
-save([folder 'H' num2str(hotel_count) '_OPT_E_Y' num2str(instance_number) '_Sol' num2str(solutions_number-1)],'result'); % Result matrix
+gurobi_solve_EC;
+save([folder 'H' num2str(hotel_count) '_OPT_EC' num2str(instance_number) '_Sol' num2str(solutions_number-1)]); % Save workspace
+save([folder 'H' num2str(hotel_count) '_OPT_EC_Y' num2str(instance_number) '_Sol' num2str(solutions_number-1)],'result'); % Result matrix
 
      
-              
+         
      
      
 

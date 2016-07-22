@@ -1,14 +1,16 @@
 %--------------------Università degli Studi di Genova----------------------
 %_________________________________EMARO+___________________________________
-%Title: Matrix_preparation H1_MP_R
-% Hotel 1... Matrix Preparation ... Revenue Formulation
+%Title: Matrix_preparation H1_MP_SG
+% Hotel 1... Matrix Preparation ... Energy Formulation Solution Generation
 %Period of preparation: 
 %Authors: Ernesto Denicia, Emmanuele Vestito
-%Script: Optimisation using Gurobi
+%Script: Preparation of matrices and parameters for Gurobi to work. A
+%generation of extra solutions with Yopt is ensured with constraints
+%Y>=Yopt and Sum(xij)<=xij_dec_vars-1
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 clc;
-clearvars -except hotel_count instance_number;
+clearvars -except hotel_count instance_number solutions_number folder;
 %% Read input file in and declare needed variables
 load('input_requests_small_hotel.mat');
 nd = size(input_requests,1);
@@ -38,6 +40,13 @@ Rdn = [Rd, ones(size(Rd,1),1)];
 Dd = competition (input_requests);
 %% Definition of constant parameters
 s = 24; % Refining factor of the simulation grid
+M = 100;
+Tsp = 20; % Temperature to be reached when a room is activated
+Ts = 3600*24; % For parameter adequation, write sampling time in the form
+             % 3600* num hours.
+% LOAD OPTIMAL YIELD FROM REVENUE STEP
+load('H1_OPT_Y1');
+Yopt = result.objbound;
 
 %% Generation of decision variables
 generate_dec_vars_Revenue;
@@ -107,12 +116,14 @@ end
 %Save it for future use in general Energy and Revenue computations
 save('H1_Rvector_1.mat','Revenue');
 %% Generation of constraints 
-generate_constraints_Revenue;
+generate_constraints_Revenue_SG;
 
-%% Gurobi specific requirements
+%% Set up objective function
 % Prepare constraints sense string 
 sense = [repmat('=',n_const1,1);...
-         repmat('<',n_const2,1)]; % Revenue constraint
+         repmat('<',n_const2,1);
+         '>';
+         repmat('<',solutions_number-1,1)]; % Revenue constraint
      
 % Variable types
 % Prepare constraints for variable types column vector
@@ -125,15 +136,13 @@ modelsense = 'max';
 Objective = Revenue;
 
 % Name result file
-folder = ['H' num2str(hotel_count) '\instance' num2str(instance_number) '\'];
-mkdir(folder);
-Result_file=[folder '\Results' num2str(instance_number) '.lp'];
-Log_file =[folder '\Log_H' num2str(hotel_count) 'R' num2str(instance_number) '.txt'];
-%% Run Gurobi
-gurobi_solve
+Result_file=[folder '\Results' num2str(instance_number) 'SG_Sol' num2str(solutions_number) '.lp'];
+Log_file =[folder '\Log_H' num2str(hotel_count) 'SG' num2str(instance_number) 'Sol' num2str(solutions_number) '.txt'];
 
-save([folder 'H' num2str(hotel_count) '_OPT_R' num2str(instance_number)]); % Save workspace
-save([folder 'H' num2str(hotel_count) '_OPT_Y' num2str(instance_number)],'result'); % Result matrix
-% result.dec_vars = dec_vars;
-% result.n_xdr = n_xdr;
-save('H1_OPT_Y1','result'); % Save result matrix
+%% Run Gurobi
+gurobi_solve;
+save([folder 'H' num2str(hotel_count) '_OPT_SG' num2str(instance_number) '_Sol' num2str(solutions_number)]); % Save workspace
+save([folder 'H' num2str(hotel_count) '_OPT_SG_Y' num2str(instance_number) '_Sol' num2str(solutions_number)],'result'); % Result matrix
+
+     
+     

@@ -7,8 +7,7 @@
 %Script: Optimisation using Gurobi
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
-clc;
-clearvars -except hotel_count instance_number;
+clc;clear;
 %% Read input file in and declare needed variables
 load('input_requests_small_hotel.mat');
 nd = size(input_requests,1);
@@ -125,15 +124,15 @@ modelsense = 'max';
 Objective = Revenue;
 
 % Name result file
-folder = ['H' num2str(hotel_count) '\instance' num2str(instance_number) '\'];
+folder = ['H' num2str(hotel_count) '\instance' num2str(instance_number)];
 mkdir(folder);
 Result_file=[folder '\Results' num2str(instance_number) '.lp'];
-Log_file =[folder '\Log_H' num2str(hotel_count) 'R' num2str(instance_number) '.txt'];
+Log_file =[folder '\Log_H' num2str(hotel_count) 'R' num2str(instance_number)];
 %% Run Gurobi
-gurobi_solve
 
-save([folder 'H' num2str(hotel_count) '_OPT_R' num2str(instance_number)]); % Save workspace
-save([folder 'H' num2str(hotel_count) '_OPT_Y' num2str(instance_number)],'result'); % Result matrix
+gurobi_solve
+save([folder 'H1_OPT_R1']); % Save workspace
+save([folder 'H1_OPT_Y1'],'result');
 % result.dec_vars = dec_vars;
 % result.n_xdr = n_xdr;
 save('H1_OPT_Y1','result'); % Save result matrix

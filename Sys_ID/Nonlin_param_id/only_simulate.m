@@ -25,7 +25,7 @@ qS = M(:,6:6:end)';
 % E.G. if we want to sample at every hour Ts = 3600
 % E.G. at every n hourse Ts = 3600*n
 % E.G. if we want to sample at every day Ts = 3600*24
-Ts = 3600*1;
+Ts = 3600*24;
 
 %% Define initial guesses and program lsqnonlin
 % Initial guess from previous optimisation

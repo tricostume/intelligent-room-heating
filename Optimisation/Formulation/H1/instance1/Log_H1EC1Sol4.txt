@@ -1,0 +1,32 @@
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 01:23:56
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 01:23:56
+
+Optimize a model with 571 rows, 403 columns and 1784 nonzeros
+Coefficient statistics:
+  Matrix range    [6e-08, 1e+02]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [6e-06, 2e+02]
+Presolve removed 462 rows and 280 columns
+Presolve time: 0.00s
+Presolved: 109 rows, 123 columns, 516 nonzeros
+Variable types: 123 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 5.420753e+01, 128 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0      54.2075328   54.20753  0.00%     -    0s
+
+Explored 0 nodes (128 simplex iterations) in 0.01 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.420753282520e+01, best bound 5.420753282520e+01, gap 0.0%
+
+Wrote requested result file 'H1\instance1\\Results1EC_Sol4.lp'
+

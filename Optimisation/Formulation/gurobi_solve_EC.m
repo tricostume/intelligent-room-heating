@@ -18,6 +18,8 @@ model.sense = sense;
 model.vtype = var_types;
 model.modelsense = modelsense;
 model.varnames = dec_vars;
+model.lb =lb;
+model.ub =ub; 
 clear params;
 params.outputflag = 1;
 params.LogFile = Log_file;

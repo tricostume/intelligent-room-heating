@@ -20,7 +20,7 @@ model.modelsense = modelsense;
 model.varnames = dec_vars;
 clear params;
 params.outputflag = 1;
-params.LogFile = Log_file;
+params.LogFile = 'mama\mama.txt';
 params.resultfile = Result_file;
 %params.timelimit = inf;
 result = gurobi(model, params);

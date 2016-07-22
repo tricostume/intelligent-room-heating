@@ -1,0 +1,198 @@
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 00:33:55
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 00:33:55
+
+Optimize a model with 146 rows, 67 columns and 406 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 8e+01]
+  Objective range [2e+00, 8e+01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+02]
+Found heuristic solution: objective 237
+Presolve removed 116 rows and 28 columns
+Presolve time: 0.00s
+Presolved: 30 rows, 39 columns, 129 nonzeros
+Variable types: 0 continuous, 39 integer (39 binary)
+
+Root relaxation: cutoff, 7 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0     cutoff    0       237.00000  237.99976  0.42%     -    0s
+
+Explored 0 nodes (7 simplex iterations) in 0.01 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.370000000000e+02, best bound 2.370000000000e+02, gap 0.0%
+
+Wrote requested result file 'H1\instance1\\Results1SG_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 00:38:15
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 00:38:15
+
+Optimize a model with 146 rows, 67 columns and 406 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 8e+01]
+  Objective range [2e+00, 8e+01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+02]
+Found heuristic solution: objective 237
+Presolve removed 116 rows and 28 columns
+Presolve time: 0.00s
+Presolved: 30 rows, 39 columns, 129 nonzeros
+Variable types: 0 continuous, 39 integer (39 binary)
+
+Root relaxation: cutoff, 7 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0     cutoff    0       237.00000  237.99976  0.42%     -    0s
+
+Explored 0 nodes (7 simplex iterations) in 0.00 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.370000000000e+02, best bound 2.370000000000e+02, gap 0.0%
+
+Wrote requested result file 'H1\instance1\\Results1SG_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 00:41:15
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 00:41:15
+
+Optimize a model with 146 rows, 67 columns and 406 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 8e+01]
+  Objective range [2e+00, 8e+01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+02]
+Found heuristic solution: objective 237
+Presolve removed 116 rows and 28 columns
+Presolve time: 0.00s
+Presolved: 30 rows, 39 columns, 129 nonzeros
+Variable types: 0 continuous, 39 integer (39 binary)
+
+Root relaxation: cutoff, 7 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0     cutoff    0       237.00000  237.99976  0.42%     -    0s
+
+Explored 0 nodes (7 simplex iterations) in 0.00 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.370000000000e+02, best bound 2.370000000000e+02, gap 0.0%
+
+Wrote requested result file 'H1\instance1\\Results1SG_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 00:50:03
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 00:50:03
+
+Optimize a model with 146 rows, 67 columns and 406 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 8e+01]
+  Objective range [2e+00, 8e+01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+02]
+Found heuristic solution: objective 237
+Presolve removed 115 rows and 28 columns
+Presolve time: 0.00s
+Presolved: 31 rows, 39 columns, 137 nonzeros
+Variable types: 0 continuous, 39 integer (39 binary)
+
+Root relaxation: cutoff, 7 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0     cutoff    0       237.00000  237.99976  0.42%     -    0s
+
+Explored 0 nodes (7 simplex iterations) in 0.01 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.370000000000e+02, best bound 2.370000000000e+02, gap 0.0%
+
+Wrote requested result file 'H1\instance1\\Results1SG_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 01:21:09
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 01:21:09
+
+Optimize a model with 146 rows, 67 columns and 406 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 8e+01]
+  Objective range [2e+00, 8e+01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+02]
+Found heuristic solution: objective 237
+Presolve removed 115 rows and 28 columns
+Presolve time: 0.00s
+Presolved: 31 rows, 39 columns, 137 nonzeros
+Variable types: 0 continuous, 39 integer (39 binary)
+
+Root relaxation: cutoff, 7 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0     cutoff    0       237.00000  237.99976  0.42%     -    0s
+
+Explored 0 nodes (7 simplex iterations) in 0.01 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.370000000000e+02, best bound 2.370000000000e+02, gap 0.0%
+
+Wrote requested result file 'H1\instance1\\Results1SG_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 01:23:20
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 01:23:20
+
+Optimize a model with 146 rows, 67 columns and 406 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 8e+01]
+  Objective range [2e+00, 8e+01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+02]
+Found heuristic solution: objective 237
+Presolve removed 115 rows and 28 columns
+Presolve time: 0.00s
+Presolved: 31 rows, 39 columns, 137 nonzeros
+Variable types: 0 continuous, 39 integer (39 binary)
+
+Root relaxation: cutoff, 7 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0     cutoff    0       237.00000  237.99976  0.42%     -    0s
+
+Explored 0 nodes (7 simplex iterations) in 0.00 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.370000000000e+02, best bound 2.370000000000e+02, gap 0.0%
+
+Wrote requested result file 'H1\instance1\\Results1SG_Sol2.lp'
+

@@ -1,14 +1,15 @@
 %--------------------Università degli Studi di Genova----------------------
 %_________________________________EMARO+___________________________________
-%Title: Matrix_preparation H1_MP_E
-% Hotel 1... Matrix Preparation ... Energy Formulation (after yield)
+%Title: Matrix_preparation H1_MP_SG
+% Hotel 1... Matrix Preparation ... Energy Formulation Solution Generation
 %Period of preparation: 
 %Authors: Ernesto Denicia, Emmanuele Vestito
-%Script: Preparation of matrices and parameters for Gurobi to work
+%Script: Preparation of matrices and parameters for Gurobi to work. A
+%generation of extra solutions with Yopt is ensured with constraints
+%Y>=Yopt and Sum(xij)<=xij_dec_vars-1
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
-clc;
-clearvars -except hotel_count instance_number solutions_number folder;
+clc;clear;
 %% Read input file in and declare needed variables
 load('input_requests_small_hotel.mat');
 nd = size(input_requests,1);
@@ -55,7 +56,7 @@ load_topology_small_hotel;
 generate_dec_vars_Energy;
 
 %% Generation of constraints 
-generate_constraints_Energy;
+generate_constraints_Energy_SG;
 
 %% Set up objective function
 % Determination of energy consumption
@@ -71,7 +72,8 @@ sense = [repmat('=',n_const1,1);...
          repmat('>',n_const5,1);...
          repmat('>',n_const6,1);...
          repmat('=',n_const7,1);
-         '>']; % Revenue constraint
+         '>';   % Revenue constraint
+         '<'];   % Other solution enforcement
      
 % Variable types
 % Prepare constraints for variable types column vector
@@ -88,16 +90,11 @@ modelsense = 'min';
 Objective = Energy_Consumption;
 
 % Name result file
-Result_file=[folder '\Results' num2str(instance_number) 'E_Sol' num2str(solutions_number) '.lp'];
-Log_file =[folder '\Log_H' num2str(hotel_count) 'E' num2str(instance_number) 'Sol' num2str(solutions_number) '.txt'];
+Result_file='Results.lp';
 
 %% Run Gurobi
 gurobi_solve;
-save([folder 'H' num2str(hotel_count) '_OPT_E' num2str(instance_number) '_Sol' num2str(solutions_number-1)]); % Save workspace
-save([folder 'H' num2str(hotel_count) '_OPT_E_Y' num2str(instance_number) '_Sol' num2str(solutions_number-1)],'result'); % Result matrix
-
      
-              
      
      
 

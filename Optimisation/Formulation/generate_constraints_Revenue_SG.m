@@ -1,48 +1,63 @@
 %--------------------Università degli Studi di Genova----------------------
 %_________________________________EMARO+___________________________________
-%Title: Matrix_preparation H1_MP_R
-% Hotel 1... Matrix Preparation ... Revenue Formulation
+%Title: Generate constraints
 %Period of preparation: 
-%Authors: Ernesto Denicia, Emmanuele Vestito
-%Script: Optimisation using Gurobi
+%Authors: Ernesto Denicia, Emmanuele Vestito, Rocco Caravelli
+%Script: Constraints are generated for linear optimisation following
+% structure A x < b, where < can be either that or >, <=, >=
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
-clc;
-clearvars -except hotel_count instance_number;
-%% Read input file in and declare needed variables
-load('input_requests_small_hotel.mat');
-nd = size(input_requests,1);
-D = {};
-R = {};
-% Load marketing strategy of the hotel
-load_marketing_strategy;
-%% Commercial description of the hotel
-% The rooms with which the hotel counts and their kind depending on class,
-% number of people and type of bed.
-% NOTICE: Inside of the function an input file is loaded!
-load_commercial_description;
 
-%% Generate sets
-% Generate request set and numeration
-for i = 0:nd-1
-    temp = ['d' num2str(i) '_'];
-    D = [D,temp];
+%% One room assigned to each request
+A_row = zeros(1,size(dec_vars,2));
+A=[];
+b=[];
+for i=1:size(Rdn,1) % requests
+    for j=1: size(Rdn,2) % rooms
+        if Rdn(i,j) == 1
+            if j == size(Rdn,2)
+                Ix1 = fiix(dec_vars,['x' num2str(i-1) '_n_']);
+                A_row(Ix1) = 1;
+            else
+                Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1) '_']);
+                A_row(Ix1) = 1;
+            end
+        end
+    end
+    A = [A; A_row];
+    A_row = zeros(1,size(dec_vars,2));
 end
+n_const1 = size(A,1);
+% Fill in respective b vector
+b = ones(n_const1,1);
 
-% All compatible rooms with each request
-Rd = compatibility ( input_requests, input_rooms );
-% Add dummy node
-Rdn = [Rd, ones(size(Rd,1),1)];
-% Generate competing requests for each of the existing requests based on
-% marketing analysis
-Dd = competition (input_requests);
-%% Definition of constant parameters
-s = 24; % Refining factor of the simulation grid
+%% Avoidance of ties
+A_row = zeros(1,size(dec_vars,2));
+for i=1:size(Dd,1) % actual request
+    for j=1:size(Dd,2) % competing requests
+        if Dd(i,j) == 1
+            temp = Rdn(i,:).*Rdn(j,:);% Room Intersection of both requests
+            for k=1:size(temp,2) % maximum compatible rooms
+                if temp(k) == 1
+                    if k ~= size(Rd,2)+ 1
+                        Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(k-1) '_']);
+                        Ix2 = fiix(dec_vars,['x' num2str(j-1) '_' num2str(k-1) '_']);
+                        A_row(Ix1) = 1;
+                        A_row(Ix2) = 1;
+                        A = [A; A_row];
+                    end
+                    A_row = zeros(1,size(dec_vars,2));
+                end
+            end
+        end
+    end   
+end
+n_const2 = size(A,1)-n_const1;
 
-%% Generation of decision variables
-generate_dec_vars_Revenue;
+% Fill in respective b vector
+b = [b;ones(n_const2,1)];
 
-%% Set up objective function
+%% Yield at least optimal yield found before
 % Profit assigning request d to room r
 Income=[10 25 80]; %Number of available commercial rooms4 16 80
 Outcome=[1 3 8]; % Maintenance of those rooms 
@@ -104,36 +119,28 @@ for i = 1:size(Rdn,1) % request
    end
 end
 
-%Save it for future use in general Energy and Revenue computations
-save('H1_Rvector_1.mat','Revenue');
-%% Generation of constraints 
-generate_constraints_Revenue;
 
-%% Gurobi specific requirements
-% Prepare constraints sense string 
-sense = [repmat('=',n_const1,1);...
-         repmat('<',n_const2,1)]; % Revenue constraint
-     
-% Variable types
-% Prepare constraints for variable types column vector
-var_types = repmat('B',n_xdr,1);
+% Constraint form
+A = [A; Revenue];
+b= [b; Yopt];
+n_const3 = size(A,1)-n_const1-n_const2;
+%% Enforcing generation of other solutions
+  
+for j=1:solutions_number-1
+    if j == 1
+        extracted_xdr = result.x;
+    else
+        load([folder 'H' num2str(hotel_count) '_OPT_SG_Y' num2str(instance_number) '_Sol' num2str(j) '.mat']);
+        extracted_xdr = result.x;
+    end
+    A_row = zeros(1,size(dec_vars,2));
+    for i= 1: n_xdr
+        if extracted_xdr(i) == 1
+            A_row(i) = 1;
+        end
+    end
+    A= [A; A_row];
+    b= [b;sum(extracted_xdr)-1]; % Enforcement to generate other solutions
+end
 
-% Choose kind of problem
-modelsense = 'max';
-
-% Pass objective function
-Objective = Revenue;
-
-% Name result file
-folder = ['H' num2str(hotel_count) '\instance' num2str(instance_number) '\'];
-mkdir(folder);
-Result_file=[folder '\Results' num2str(instance_number) '.lp'];
-Log_file =[folder '\Log_H' num2str(hotel_count) 'R' num2str(instance_number) '.txt'];
-%% Run Gurobi
-gurobi_solve
-
-save([folder 'H' num2str(hotel_count) '_OPT_R' num2str(instance_number)]); % Save workspace
-save([folder 'H' num2str(hotel_count) '_OPT_Y' num2str(instance_number)],'result'); % Result matrix
-% result.dec_vars = dec_vars;
-% result.n_xdr = n_xdr;
-save('H1_OPT_Y1','result'); % Save result matrix
+n_const4 = size(A,1)-n_const1-n_const2-n_const3; 
