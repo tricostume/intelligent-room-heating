@@ -33,7 +33,7 @@ b = ones(n_const1,1);
 
 %% Avoidance of ties
 A_row = zeros(1,size(dec_vars,2));
-A_temp = zeros(30000,size(dec_vars,2));
+A_temp = zeros(50000,size(dec_vars,2));
 index = 1;
 
 for i=1:size(Dd,1) % actual request
@@ -58,7 +58,7 @@ for i=1:size(Dd,1) % actual request
     end   
 end
 
-A_temp = A_temp(1:index,:);
+A_temp = A_temp(1:index-1,:);
 A = [A;A_temp];
 n_const2 = size(A,1)-n_const1;
 

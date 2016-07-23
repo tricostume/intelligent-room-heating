@@ -1,0 +1,68 @@
+
+Gurobi 6.5.2 (win64) logging started 07/23/16 02:28:40
+
+
+Gurobi 6.5.2 (win64) logging started 07/23/16 02:28:40
+
+Optimize a model with 5885 rows, 900 columns and 13571 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-06, 1e+03]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+03]
+Found heuristic solution: objective 1708.25
+Presolve removed 5856 rows and 870 columns
+Presolve time: 0.00s
+Presolved: 29 rows, 30 columns, 90 nonzeros
+Found heuristic solution: objective 202.6266650
+Variable types: 30 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 1.528507e+02, 21 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     152.8506567  152.85066  0.00%     -    0s
+
+Explored 0 nodes (21 simplex iterations) in 0.01 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.528506567486e+02, best bound 1.528506567486e+02, gap 0.0%
+
+Wrote requested result file 'H2\instance1\\Results1EC_Sol4.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/23/16 02:30:26
+
+
+Gurobi 6.5.2 (win64) logging started 07/23/16 02:30:26
+
+Optimize a model with 5885 rows, 900 columns and 13571 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-06, 1e+03]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+03]
+Found heuristic solution: objective 1708.25
+Presolve removed 5856 rows and 870 columns
+Presolve time: 0.00s
+Presolved: 29 rows, 30 columns, 90 nonzeros
+Found heuristic solution: objective 202.6266650
+Variable types: 30 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 1.528507e+02, 21 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     152.8506567  152.85066  0.00%     -    0s
+
+Explored 0 nodes (21 simplex iterations) in 0.01 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.528506567486e+02, best bound 1.528506567486e+02, gap 0.0%
+
+Wrote requested result file 'H2\instance1\\Results1EC_Sol4.lp'
+

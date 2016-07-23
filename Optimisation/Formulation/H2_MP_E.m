@@ -13,7 +13,7 @@ clearvars -except hotel_count instance_number solutions_number folder;
 name_change = 30;
 if instance_number >= 21
     name_change = 65;
-elseif instance_number == 11
+elseif instance_number >= 11
     name_change = 50;
 end
 load(['demand_big_hotel_23\demand_big23_' num2str(name_change) '_' num2str(instance_number) '.mat']);

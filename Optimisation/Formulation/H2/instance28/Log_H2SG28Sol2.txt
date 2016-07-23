@@ -1,0 +1,64 @@
+
+Gurobi 6.5.2 (win64) logging started 07/23/16 03:37:57
+
+
+Gurobi 6.5.2 (win64) logging started 07/23/16 03:37:57
+
+Optimize a model with 31754 rows, 1114 columns and 65596 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 5e+01]
+  Objective range [7e+00, 5e+01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 9e+02]
+Presolve removed 31588 rows and 45 columns
+Presolve time: 0.05s
+Presolved: 166 rows, 1069 columns, 4633 nonzeros
+Variable types: 0 continuous, 1069 integer (1069 binary)
+
+Root relaxation: objective 8.630000e+02, 358 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     863.0000000  863.00000  0.00%     -    0s
+
+Explored 0 nodes (358 simplex iterations) in 0.12 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.630000000000e+02, best bound 8.630000000000e+02, gap 0.0%
+
+Wrote requested result file 'H2\instance28\\Results28SG_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/23/16 03:48:37
+
+
+Gurobi 6.5.2 (win64) logging started 07/23/16 03:48:37
+
+Optimize a model with 31754 rows, 1114 columns and 65596 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 5e+01]
+  Objective range [7e+00, 5e+01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 9e+02]
+Presolve removed 31588 rows and 45 columns
+Presolve time: 0.05s
+Presolved: 166 rows, 1069 columns, 4633 nonzeros
+Variable types: 0 continuous, 1069 integer (1069 binary)
+
+Root relaxation: objective 8.630000e+02, 358 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     863.0000000  863.00000  0.00%     -    0s
+
+Explored 0 nodes (358 simplex iterations) in 0.08 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.630000000000e+02, best bound 8.630000000000e+02, gap 0.0%
+
+Wrote requested result file 'H2\instance28\\Results28SG_Sol2.lp'
+

@@ -8,8 +8,8 @@
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 num_solutions=0;
-for hotel_count = 1:1
-    for instance_number=11:30
+for hotel_count = 2:2
+    for instance_number=28:30
         % Run Revenue Formulation
         eval(['H' num2str(hotel_count) '_MP_R']);
         solutions_number = 2;
