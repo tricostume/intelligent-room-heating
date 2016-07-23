@@ -11,7 +11,7 @@ close all; clc
 clearvars -except hotel_count instance_number
 load(['..\Optimisation\Formulation\H' num2str(hotel_count) '\instance' ...
        num2str(instance_number) '\H' num2str(hotel_count) '_OPT_E' ...
-       num2str(instance_number) '_Sol5.mat']);
+       num2str(instance_number) '_Sol1.mat']);
 %load('..\Optimisation\Formulation\H1\instance1\H1_OPT_R1.mat');
 global i_states;
 samples = size(zit,2)*24; % Note: measured in hours

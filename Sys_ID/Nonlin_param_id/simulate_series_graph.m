@@ -70,6 +70,9 @@ for i=1:nx-12
     title(['Room' num2str(i-1)])
     ylabel('Temp[°]')
 end
+hl = legend('T_{sp}','T^_{i,t}','T_{i,t}');
+set(hl, 'interpreter', 'tex')
+print('Sys_ID','-dpng')
 %linkaxes (ax,'x');
 %linkaxes (ax,'y');
 end

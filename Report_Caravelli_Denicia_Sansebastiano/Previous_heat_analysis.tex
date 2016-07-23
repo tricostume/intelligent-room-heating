@@ -1,8 +1,13 @@
 \section{Previous heat and control analysis}
 In order to analyse the heat fluxes governing the heat transmission of a building there are two ways to proceed: taking blueprints of the building and, knowing all the material properties, making a heat analysis of every room, or taking the temperature of every room and identify the parameters to know the behave of heat fluxes. Because both approaches lead to the solution, we decided to make two independent previous analysis. \\
 Each procedure is based on the equivalence having on the left side the summation of heat fluxes at a specific time instant and on the right side the variation of the internal energy from an instant to the following one:
-$$q_{tot_{t}} = \Sigma q_{k_{t}} + \Sigma q_{h_{t}} + \Sigma q_{vent_{t}} + \Sigma q_{sun_{t}} + q_{pump_{t}}$$
-$$q_{tot_{t}} = \rho V c_{p} \frac{d T}{d t}$$
+\begin{align*}
+& q_{tot_{t}} = \Sigma q_{k_{t}} + \Sigma q_{h_{t}} + \Sigma q_{vent_{t}} + \Sigma q_{sun_{t}} + q_{pump_{t}} \\
+& q_{tot_{t}} = \rho V c_{p} \frac{d T}{d t} \numberthis
+\label{eq:model}
+\end{align*}
+
+
 Where:
 
 $q_{k}$ is the thermal convection; \\

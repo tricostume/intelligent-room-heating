@@ -16,6 +16,18 @@
 %\usepackage{titling}
 \usepackage{algorithm2e}
 \usepackage{amsmath,lipsum}
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{sidecap}
+\usepackage{amssymb}
+\usepackage{array,multirow,graphicx}
+\usepackage{booktabs}
+\usepackage{rotating}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 %\overrideIEEEmargins
 
@@ -86,6 +98,10 @@ Finally, we have the proof the temperature of a room influences the one of the o
 \input{State_of_the_art.tex} %done
  
 \input{Previous_heat_analysis.tex}
+
+\input{Sys_ID.tex}
+
+\input{Opt.tex}
 
 \input{analysis_of_the_problem.tex}
 

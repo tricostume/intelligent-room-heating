@@ -5,8 +5,10 @@
 \BOOKMARK [2][-]{subsection.4.1}{Blueprint analysis strategy}{section.4}% 5
 \BOOKMARK [2][-]{subsection.4.2}{System identification strategy}{section.4}% 6
 \BOOKMARK [2][-]{subsection.4.3}{P control vs. ON/OFF control}{section.4}% 7
-\BOOKMARK [1][-]{section.5}{analysis of the problem}{}% 8
-\BOOKMARK [1][-]{section.6}{Results}{}% 9
-\BOOKMARK [2][-]{subsection.6.1}{Revenue}{section.6}% 10
-\BOOKMARK [2][-]{subsection.6.2}{Random assigning vs. optimized assigning}{section.6}% 11
-\BOOKMARK [1][-]{section.7}{Conclusion}{}% 12
+\BOOKMARK [2][-]{subsection.4.4}{Parameter identification}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.5}{Decision and control layers}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{analysis of the problem}{}% 10
+\BOOKMARK [1][-]{section.6}{Results}{}% 11
+\BOOKMARK [2][-]{subsection.6.1}{Revenue}{section.6}% 12
+\BOOKMARK [2][-]{subsection.6.2}{Random assigning vs. optimized assigning}{section.6}% 13
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 14
