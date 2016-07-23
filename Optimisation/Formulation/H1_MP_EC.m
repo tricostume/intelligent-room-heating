@@ -14,10 +14,10 @@ clc;
 clearvars -except hotel_count instance_number solutions_number folder;
 %% Read input file in and declare needed variables
 name_change = 30;
-if instance_number == 11
-    name_change = 50;
-elseif instance_number == 21
+if instance_number >= 21
     name_change = 65;
+elseif instance_number >= 11
+    name_change = 50;
 end
 load(['demand_small_hotel\demand_small_' num2str(name_change) '_' num2str(instance_number) '.mat']);
 

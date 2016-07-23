@@ -1,0 +1,66 @@
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 21:16:57
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 21:16:57
+
+Optimize a model with 1821 rows, 266 columns and 3846 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e+00, 3e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective -0
+Presolve removed 1699 rows and 30 columns
+Presolve time: 0.00s
+Presolved: 122 rows, 236 columns, 774 nonzeros
+Variable types: 0 continuous, 236 integer (236 binary)
+
+Root relaxation: objective 1.475000e+03, 117 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1475.0000000 1475.00000  0.00%     -    0s
+
+Explored 0 nodes (117 simplex iterations) in 0.02 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.475000000000e+03, best bound 1.475000000000e+03, gap 0.0%
+
+Wrote requested result file 'H1\instance11\\Results11.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 21:21:46
+
+
+Gurobi 6.5.2 (win64) logging started 07/22/16 21:21:46
+
+Optimize a model with 1821 rows, 266 columns and 3846 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e+00, 3e+02]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective -0
+Presolve removed 1699 rows and 30 columns
+Presolve time: 0.02s
+Presolved: 122 rows, 236 columns, 774 nonzeros
+Variable types: 0 continuous, 236 integer (236 binary)
+
+Root relaxation: objective 1.475000e+03, 117 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1475.0000000 1475.00000  0.00%     -    0s
+
+Explored 0 nodes (117 simplex iterations) in 0.02 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.475000000000e+03, best bound 1.475000000000e+03, gap 0.0%
+
+Wrote requested result file 'H1\instance11\\Results11.lp'
+
