@@ -1,0 +1,36 @@
+%--------------------Università degli Studi di Genova----------------------
+%_________________________________EMARO+___________________________________
+%Title: Gurobi solve function
+% Called after having loaded a formulation and given generic input names
+% so that this function works.
+%Period of preparation: 
+%Authors: Ernesto Denicia, Emmanuele Vestito
+%Script: Run program
+%--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+
+try
+clear model;
+model.A = sparse(A);
+model.obj = Objective;
+model.rhs = b;
+model.sense = sense;
+model.vtype = var_types;
+model.modelsense = modelsense;
+model.varnames = dec_vars;
+model.lb =lb;
+model.ub =ub; 
+clear params;
+params.outputflag = 1;
+params.LogFile = Log_file;
+params.resultfile = Result_file;
+%params.timelimit = inf;
+result = gurobi(model, params);
+disp(result)
+% for v=1:length(dec_vars)
+% fprintf('%s %d\n', dec_vars{v}, result.x(v));
+% end
+% fprintf('Obj: %e\n', result.objval);
+catch gurobiError
+fprintf('Error reported\n');
+end
