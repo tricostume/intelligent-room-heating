@@ -10,17 +10,9 @@
 clc;
 clearvars -except hotel_count instance_number;
 %% Read input file in and declare needed variables
-name_change = 30;
-if instance_number >= 21
-    name_change = 65;
-elseif instance_number == 11
-    name_change = 50;
-end
-load(['demand_big_hotel_23\demand_big23_' num2str(name_change) '_' num2str(instance_number) '.mat']);
-
+load('demand_big_hotel\demand_big_30_1.mat');
 input_requests = demand_matrix;
 clearvars -except hotel_count instance_number input_requests;
-%load('input_requests_small_hotel.mat');
 
 nd = size(input_requests,1);
 D = {};
@@ -31,7 +23,7 @@ load_marketing_strategy;
 % The rooms with which the hotel counts and their kind depending on class,
 % number of people and type of bed.
 % NOTICE: Inside of the function an input file is loaded!
-load_commercial_description_bighotel23;
+load_commercial_description_big_hotel;
 
 %% Generate sets
 % Generate request set and numeration
@@ -49,6 +41,7 @@ Rdn = [Rd, ones(size(Rd,1),1)];
 Dd = competition (input_requests);
 %% Definition of constant parameters
 s = 24; % Refining factor of the simulation grid
+
 %% Generation of decision variables
 generate_dec_vars_Revenue;
 
@@ -103,7 +96,7 @@ for i = 1:size(Rdn,1) % request
                    elseif str2num(type2str(input_rooms(j,:))) == 233
                         Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                         Revenue(Ix1) = Profit(3,3)*(input_requests(i,5)-input_requests(i,4));
-                   elseif str2num(type2str(input_rooms(j,:))) == 123
+                   elseif str2num(type2str(input_rooms(j,:))) == 123 
                        Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                        Revenue(Ix1) = Profit(3,2)*(input_requests(i,5)-input_requests(i,4)); 
                    end

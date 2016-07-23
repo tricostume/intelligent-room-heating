@@ -1,29 +1,16 @@
 %--------------------Università degli Studi di Genova----------------------
 %_________________________________EMARO+___________________________________
-%Title: Matrix_preparation H1_MP_EC
-% Hotel 1... Matrix Preparation ... Energy Calculator (after yield and 
-% given already some solution decision variables)
+%Title: Matrix_preparation H1_MP_E
+% Hotel 1... Matrix Preparation ... Energy Formulation (after yield)
 %Period of preparation: 
 %Authors: Ernesto Denicia, Emmanuele Vestito
-%Script: Preparation of matrices and parameters for Gurobi to work Upper
-%and lowe bounds are put on assignment decision variables to allow Gurobi
-%only calculate the energy consumption result.
+%Script: Preparation of matrices and parameters for Gurobi to work
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 clc;
 clearvars -except hotel_count instance_number solutions_number folder;
 %% Read input file in and declare needed variables
-name_change = 30;
-if instance_number >= 21
-    name_change = 65;
-elseif instance_number == 11
-    name_change = 50;
-end
-load(['demand_big_hotel_23\demand_big23_' num2str(name_change) '_' num2str(instance_number) '.mat']);
-
-input_requests = demand_matrix;
-clearvars -except hotel_count instance_number solutions_number folder input_requests;
-%load('input_requests_small_hotel.mat');
+load('input_requests_small_hotel.mat');
 nd = size(input_requests,1);
 D = {};
 R = {};
@@ -33,7 +20,7 @@ load_marketing_strategy;
 % The rooms with which the hotel counts and their kind depending on class,
 % number of people and type of bed.
 % NOTICE: Inside of the function an input file is loaded!
-load_commercial_description_bighotel23;
+load_commercial_description;
 
 %% Generate sets
 % Generate request set and numeration
@@ -51,7 +38,7 @@ Rdn = [Rd, ones(size(Rd,1),1)];
 Dd = competition (input_requests);
 %% Definition of constant parameters
 s = 24; % Refining factor of the simulation grid
-M = 1000;
+M = 100;
 Tsp = 20; % Temperature to be reached when a room is activated
 Ts = 3600*24; % For parameter adequation, write sampling time in the form
              % 3600* num hours.
@@ -59,13 +46,16 @@ Ts = 3600*24; % For parameter adequation, write sampling time in the form
 load('H1_OPT_Y1');
 Yopt = result.objbound;
 %% Generation of hotel topology and flux decision variables
-
-load_topology_big_hotel23
+% Used in model constraints
+load_topology_small_hotel;
+% % Flux decision variables based on loaded adjacencies
+% % Exterior fluxes on grid s
+% load_flux_decision_variables
 %% Generation of decision variables
 generate_dec_vars_Energy;
 
 %% Generation of constraints 
-generate_constraints_Energy_23;
+generate_constraints_Energy;
 
 %% Set up objective function
 % Determination of energy consumption
@@ -81,7 +71,7 @@ sense = [repmat('=',n_const1,1);...
          repmat('>',n_const5,1);...
          repmat('>',n_const6,1);...
          repmat('>',n_const7,1);...
-         repmat('=',n_const8,1);
+         repmat('=',n_const8,1);...
          '>']; % Revenue constraint
      
 % Variable types
@@ -98,33 +88,17 @@ modelsense = 'min';
 % Pass objective function
 Objective = Energy_Consumption;
 
-% Lower and upper bounds for energy calculation
-
-for j=1:solutions_number-1
-    if j == 1
-
-    else
-        load([folder 'H' num2str(hotel_count) '_OPT_SG_Y' num2str(instance_number) '_Sol' num2str(j) '.mat']);
-    end
-        lb = zeros(1,size(dec_vars,2));
-        lb(1:n_xdr) = result.x;
-        ub = inf(1,size(dec_vars,2)); 
-        ub(1:n_xdr) = result.x;
-
-end
-
 % Name result file
-Result_file=[folder '\Results' num2str(instance_number) 'EC_Sol' num2str(solutions_number) '.lp'];
-Log_file =[folder '\Log_H' num2str(hotel_count) 'EC' num2str(instance_number) 'Sol' num2str(solutions_number) '.txt'];
-
+Result_file=[folder '\Results' num2str(instance_number) 'E_Sol' num2str(solutions_number) '.lp'];
+Log_file =[folder '\Log_H' num2str(hotel_count) 'E' num2str(instance_number) 'Sol' num2str(solutions_number) '.txt'];
 
 %% Run Gurobi
-gurobi_solve_EC;
-save([folder 'H' num2str(hotel_count) '_OPT_EC' num2str(instance_number) '_Sol' num2str(solutions_number-1)]); % Save workspace
-save([folder 'H' num2str(hotel_count) '_OPT_EC_Y' num2str(instance_number) '_Sol' num2str(solutions_number-1)],'result'); % Result matrix
+gurobi_solve;
+save([folder 'H' num2str(hotel_count) '_OPT_E' num2str(instance_number) '_Sol' num2str(solutions_number-1)]); % Save workspace
+save([folder 'H' num2str(hotel_count) '_OPT_E_Y' num2str(instance_number) '_Sol' num2str(solutions_number-1)],'result'); % Result matrix
 
      
-         
+              
      
      
 

@@ -10,7 +10,17 @@
 clc;
 clearvars -except hotel_count instance_number solutions_number folder;
 %% Read input file in and declare needed variables
-load('input_requests_small_hotel.mat');
+name_change = 30;
+if instance_number >= 21
+    name_change = 65;
+elseif instance_number == 11
+    name_change = 50;
+end
+load(['demand_big_hotel_23\demand_big23_' num2str(name_change) '_' num2str(instance_number) '.mat']);
+
+input_requests = demand_matrix;
+clearvars -except hotel_count instance_number solutions_number folder input_requests;
+%load('input_requests_small_hotel.mat');
 nd = size(input_requests,1);
 D = {};
 R = {};
@@ -20,7 +30,7 @@ load_marketing_strategy;
 % The rooms with which the hotel counts and their kind depending on class,
 % number of people and type of bed.
 % NOTICE: Inside of the function an input file is loaded!
-load_commercial_description;
+load_commercial_description_bighotel23;
 
 %% Generate sets
 % Generate request set and numeration
@@ -46,16 +56,13 @@ Ts = 3600*24; % For parameter adequation, write sampling time in the form
 load('H1_OPT_Y1');
 Yopt = result.objbound;
 %% Generation of hotel topology and flux decision variables
-% Used in model constraints
-load_topology_small_hotel;
-% % Flux decision variables based on loaded adjacencies
-% % Exterior fluxes on grid s
-% load_flux_decision_variables
+
+load_topology_big_hotel23
 %% Generation of decision variables
 generate_dec_vars_Energy;
 
 %% Generation of constraints 
-generate_constraints_Energy;
+generate_constraints_Energy_23;
 
 %% Set up objective function
 % Determination of energy consumption
@@ -94,8 +101,8 @@ Log_file =[folder '\Log_H' num2str(hotel_count) 'E' num2str(instance_number) 'So
 
 %% Run Gurobi
 gurobi_solve;
-save([folder 'H' num2str(hotel_count) '_OPT_E' num2str(instance_number) '_Sol' num2str(solutions_number-1)]); % Save workspace
-save([folder 'H' num2str(hotel_count) '_OPT_E_Y' num2str(instance_number) '_Sol' num2str(solutions_number-1)],'result'); % Result matrix
+save([folder 'H' num2str(hotel_count) '_OPT_E' num2str(instance_number)]); % Save workspace
+save([folder 'H' num2str(hotel_count) '_OPT_E_Y' num2str(instance_number)],'result'); % Result matrix
 
      
               
