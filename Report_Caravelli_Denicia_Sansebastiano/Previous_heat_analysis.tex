@@ -1,53 +1,70 @@
-\section{Previous heat and control analysis}
-In order to analyse the heat fluxes governing the heat transmission of a building there are two ways to proceed: taking blueprints of the building and, knowing all the material properties, making a heat analysis of every room, or taking the temperature of every room and identify the parameters to know the behave of heat fluxes. Because both approaches lead to the solution, we decided to make two independent previous analysis. \\
-Each procedure is based on the equivalence having on the left side the summation of heat fluxes at a specific time instant and on the right side the variation of the internal energy from an instant to the following one:
+\section{Previous analysis} \label{development}
+The transference relationships of a building can be obtained in two forms: either by taking blueprints of the transmission surfaces and estimating the parameters with theoretical tables or by gathering enough information to perform a parametric identification with optimisation techniques. One could directly propose a first order differential model, corresponding to that in nature of a generalized thermal transmission system and accounting for continuity and energy conservation relationships. Eq.~\ref{eq:model} shows how this model looks like.
+
 \begin{align*}
 & q_{tot_{t}} = \Sigma q_{k_{t}} + \Sigma q_{h_{t}} + \Sigma q_{vent_{t}} + \Sigma q_{sun_{t}} + q_{pump_{t}} \\
 & q_{tot_{t}} = \rho V c_{p} \frac{d T}{d t} \numberthis
 \label{eq:model}
 \end{align*}
-
-
 Where:
 
 $q_{k}$ is the thermal convection; \\
 $q_{h}$ is the thermal conduction; \\
-$q_{vent}$ is the ventilation flux according to the norm UNI/TS 11300; \\
+$q_{vent}$ is the ventilation flux according to the norm UNI/TS 11300 \cite{normUNI}; \\
 $q_{sun}$ is the sun radiation took from weather forecast; \\
 $q_{pump}$ is the heat flux coming from the heat pump (if activated); \\
 $\rho V c_{p} \frac{d T}{d t}$ is the time derivative of the internal energy.
 
 \subsection{Blueprint analysis strategy}
-Since the used scenarios must be realistic we planned three kind of room according with their price and structure ($25$ $m^2$, $50$ $m^2$, $75$ $m^2$) and the same amount of customer kinds.
-Every wall is made by common bricks (density: $2000$ $\frac{kg}{m^3}$; heat capacity: $0.9$ $\frac{kJ}{kg K}$; thermal conduction: $8 e^{-4}$ $\frac{kJ}{s m K}$); the exterior wall thickness is $0.4$ $m$, while the interior one is $0.1$ $m$. Every room have at least a window and one door on the corridor. The windows are made by common glass (density: $2400$ $\frac{kg}{m^3}$; heat capacity: $0.84$ $\frac{kJ}{kg K}$; thermal conduction: $9.6 e^{-4}$ $\frac{kJ}{s m K}$), and its thickness is $0.04$ $m$, while the doors are assumed to be like the interior wall for their heat behaviour. To run these initial set of experiments we decided to use real heat pumps (any other kind of heat source do not change the result) taken by the commercial catalogue Daikin Industries, in particular we used the heat pump called 'FTXZ35N'.
+Two hotels were proposed for means of validation of this work, a small hotel consisting on 12 rooms of the same size but of different classes (maybe due to their contents) and a bigger one with three kind of room according with their price and structure ($25$ $m^2$, $50$ $m^2$, $75$ $m^2$) and the same amount of customer kinds. 
+Further parametrisations include the material of the walls (common bricks with density: $2000$ $\frac{kg}{m^3}$; heat capacity: $0.9$ $\frac{kJ}{kg K}$; thermal conduction: $8 e^{-4}$ $\frac{kJ}{s m K}$;)  the exterior wall thickness is proposed to be $0.4$ wide$m$, while the interior one is $0.1$ $m$. Every room has at least a window and one door on the corridor. The windows are made of common glass (density: $2400$ $\frac{kg}{m^3}$; heat capacity: $0.84$ $\frac{kJ}{kg K}$; thermal conduction: $9.6 e^{-4}$ $\frac{kJ}{s m K}$), and their thickness is $0.04$ $m$, while the doors are assumed to be like the interior walls. To run these initial set of experiments real Daikin Industries \cite{daikin}.
 
-Due to the fact computer cannot handle continuous domain, the heat transfer equation must be discrete:
-$$q_{tot_{t}} = \rho V c_{p} \frac{d T}{d t} \hspace{5mm} --> \hspace{5mm} \frac{q_{tot_{t}}}{\rho V c_{p}} = \frac{T_{t+1} - T_{t}}{time \\ gap}$$
-Then, we can rewrite the equation:
-$$K_{i,j} (T_{i,t} - T_{j,t}) = \frac{C_{i}}{time \\ gap} (T_{i,t+1} - T_{i,t})$$
-Where:
+A parameter identification strategy would require of more software preparation but ensures from the beginning the addition of a first layer of intelligence capable of learning the parameters of the real building in time for posterior analysis. Differences from the theoretical model and the real model are taken into consideration by any error minimisation approach applied to a vector of parameters. The blueprint analysis strategy is faster than the system identification strategy, however if the company evaluating the building knows exactly every single part of the hotel.
 
-$K_{i,j}$ is the heat transfer coefficient from the room j to i; \\
-$C_{i,j}$ is the capacitance of the room i;
+\subsection{Parameter identification strategy}
 
-\subsection{System identification strategy}
-The practise requires the temperature of the air of each room at each instant of the analysis   
+At the first phase, the scheduling system must be robust enough to be put into operation with possibly little a priori information available. A fast revision of the construction conditions of the hotel motivates thence to the use of an initial model estimate of the linear time invariant form \ref{eq:model}. This assumption is not inadequate at all given that the fundamental frequencies of the transference relationships are expected to be low. 
 
+However, it is required that the system acquires a good estimate on the real thermal performance of the building with time. An intelligent layer capable of learning the parameters characterizing its thermal isolating quality is then proposed.  Consider an extended continuous abstraction of the form:
 
+\begin{align*}
+& c_i\dot{T}_{i}=-K_{i,e}(T_{i}-T_{e})+\sum_{i\sim j}(T_{i}-T_{j})+K_{u}u_{i}+q^S_{i}\\
+& \forall i \mid 0=1...n_r \numberthis
+\end{align*}
 
-E-plus
+with parameters $c_i$ (conservation of energy) and transmittance (principle of continuity) parameters for inner adjacencies $K_{i,j}$ as well as those with the exterior (exogenous in nature) state $T_e$. Strictly adjacent rooms $i$ and $j$ are considered by emphasizing the coherence of their flux equality relations, described strictly by $q_{i,j}=K_{i,j}(T_i-T_j)$. Room control inputs $u_i$ are also taken into account as well as the predictable solar flux $q^S_{i}$ radiated into windows of each room. The characteristic discretisation is therefore given by the predictive form  \textbf{$S_p$}:
+\begin{align*}
+& \hat{T}_{i,t+1}=\frac{1}{c_i}\left[\sum_{i\sim j\bigcup e}(\hat{T}_{i,t}-\hat{T}_{j,t})+K_{u}u_{i,t}+q^S_{i,t}+\hat{T}_{i,t}\right]\\
+& u_{i,t}=u_{i,t-1}+K_{u,i}(e_{i,t}-e_{i,t-1})\\
+& e_{i,t} = T_{sp,t}-T_{i,t}\\
+& \forall i \mid 0=1...n_r\\
+& \forall t \mid t=1...P \numberthis
+\end{align*}
 
-bla bla
+where already the exterior node is considered inside the whole set of adjacencies per room and a deliberate proportional control structure of the form $q_{u,i}=K_{u,i}(T_{sp,t}-T_i)$ is proposed for $T_sp$ desired temperature at the time a room is to be heated. A pure algebraic error state $e_{i,t}$ is also expanded determining the whole discretisation strategy. 
+With initial parameter estimates $K_{i,j}^o$ and $c_{i}^o$ from mechanical abstraction in Eq.~\ref{eq:model}, it is possible to solve a Nonlinear Least Squares optimisation problem with the aim of minimising predicting errors by means of the formulation
 
-\subsection{P control vs. ON/OFF control}
+\begin{equation}
+\begin{array}{rlclcl}
+\displaystyle \theta^*=\arg \min_{\theta\in\mathbb{R}} & \multicolumn{3}{l}{(T_{i,t}-\hat{T}_{i,t})^2} \\
+\textrm{s.t.} & \theta \geq 0 \\
+& S_p = 0\\
+\end{array}
+\label{eq:opt_k_cluster}
+\end{equation}
 
+returning the optimal parameter vector $\theta^*$ and performed over timespan $P$. Notice that one can warm up the optimisation routine with an initial first Linear Least Squares approach applied to an ARX-Model attempt. Nevertheless, in the scope of this work, it was demonstrated that the default trust-region-reflective algorithm implemented by \textbf{\texttt{MATLAB}} \texttt{lsqnonlin} solver could deal very well with this task.
 
-map of the hotel
+For changes in the sampling rate at which the system can learn the parameters of the building, one could also start with a rough approximation and iteratively decrease the time differential in order to refine the solution. The analysis proposed here uses a sampling period of one hour and involves the use of more accurate simulations from the toolbox \textbf{\texttt{E-plus}}, providing the exogenous inputs of the optimisation problem and thence bounding the performance of the system up to the degree of mismatch of the toolbox itself.
 
-different curves for the temperature depending on floors
+In the real scenario, after put in operation, the scheduling system can be interfaced with the (probably) existing thermostats of the building and program itself e.g. once a week to improve the parametric estimation of the real structure and ensure more accurate results with time. Fig.~\ref{fig:sys_id} shows the obtained estimation.
 
-gap-time
-
-Assumptions on the hotel (temperature in - out, sun)
+\begin{figure}[thpb]
+	\centering
+	\framebox{\parbox{3in}{\includegraphics[width=77mm]{img/Sys_ID.png}}}
+	%\includegraphics[scale=1.0]{figurefile}
+	\caption{Forward simulation of the system after parameter identification.}
+	\label{fig:sys_id}
+\end{figure}
 
 

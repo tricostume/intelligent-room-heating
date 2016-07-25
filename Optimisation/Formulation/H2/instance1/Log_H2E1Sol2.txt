@@ -1,0 +1,74 @@
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:30:52
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:30:52
+
+Optimize a model with 5819 rows, 947 columns and 14225 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-03, 4e+02]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+03]
+Presolve removed 5611 rows and 543 columns
+Presolve time: 0.02s
+Presolved: 208 rows, 404 columns, 1869 nonzeros
+Variable types: 0 continuous, 404 integer (404 binary)
+
+Root relaxation: objective 2.250000e+01, 180 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   22.50000    0   33          -   22.50000      -     -    0s
+H    0     0                      27.0000000   22.50000  16.7%     -    0s
+     0     0 infeasible    0        27.00000   24.00003  11.1%     -    0s
+
+Cutting planes:
+  Zero half: 6
+
+Explored 0 nodes (329 simplex iterations) in 0.07 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.700000000000e+01, best bound 2.700000000000e+01, gap 0.0%
+
+Wrote requested result file 'H2\instance1\\Results1E_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:33:55
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:33:55
+
+Optimize a model with 5819 rows, 947 columns and 14225 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-03, 4e+02]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+03]
+Presolve removed 5611 rows and 543 columns
+Presolve time: 0.02s
+Presolved: 208 rows, 404 columns, 1869 nonzeros
+Variable types: 0 continuous, 404 integer (404 binary)
+
+Root relaxation: objective 2.250000e+01, 180 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   22.50000    0   33          -   22.50000      -     -    0s
+H    0     0                      27.0000000   22.50000  16.7%     -    0s
+     0     0 infeasible    0        27.00000   24.00003  11.1%     -    0s
+
+Cutting planes:
+  Zero half: 6
+
+Explored 0 nodes (329 simplex iterations) in 0.05 seconds
+Thread count was 8 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.700000000000e+01, best bound 2.700000000000e+01, gap 0.0%
+
+Wrote requested result file 'H2\instance1\\Results1E_Sol2.lp'
+

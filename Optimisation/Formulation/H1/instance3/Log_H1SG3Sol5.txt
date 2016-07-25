@@ -1,64 +1,32 @@
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 20:28:41
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:24:12
 
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 20:28:41
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:24:12
 
-Optimize a model with 352 rows, 132 columns and 976 nonzeros
+Optimize a model with 445 rows, 149 columns and 1190 nonzeros
 Coefficient statistics:
   Matrix range    [1e+00, 6e+02]
   Objective range [2e+00, 6e+02]
   Bounds range    [1e+00, 1e+00]
-  RHS range       [1e+00, 1e+03]
-Presolve removed 283 rows and 15 columns
+  RHS range       [1e+00, 2e+03]
+Presolve removed 374 rows and 23 columns
 Presolve time: 0.00s
-Presolved: 69 rows, 117 columns, 463 nonzeros
-Variable types: 0 continuous, 117 integer (117 binary)
+Presolved: 71 rows, 126 columns, 505 nonzeros
+Variable types: 0 continuous, 126 integer (126 binary)
 
-Root relaxation: objective 1.376000e+03, 35 iterations, 0.00 seconds
+Root relaxation: objective 1.715000e+03, 37 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-*    0     0               0    1376.0000000 1376.00000  0.00%     -    0s
+*    0     0               0    1715.0000000 1715.00000  0.00%     -    0s
 
-Explored 0 nodes (35 simplex iterations) in 0.02 seconds
+Explored 0 nodes (37 simplex iterations) in 0.00 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 1.376000000000e+03, best bound 1.376000000000e+03, gap 0.0%
-
-Wrote requested result file 'H1\instance3\\Results3SG_Sol5.lp'
-
-
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:05:18
-
-
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:05:18
-
-Optimize a model with 352 rows, 132 columns and 976 nonzeros
-Coefficient statistics:
-  Matrix range    [1e+00, 6e+02]
-  Objective range [2e+00, 6e+02]
-  Bounds range    [1e+00, 1e+00]
-  RHS range       [1e+00, 1e+03]
-Presolve removed 283 rows and 15 columns
-Presolve time: 0.00s
-Presolved: 69 rows, 117 columns, 463 nonzeros
-Variable types: 0 continuous, 117 integer (117 binary)
-
-Root relaxation: objective 1.376000e+03, 35 iterations, 0.00 seconds
-
-    Nodes    |    Current Node    |     Objective Bounds      |     Work
- Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-
-*    0     0               0    1376.0000000 1376.00000  0.00%     -    0s
-
-Explored 0 nodes (35 simplex iterations) in 0.02 seconds
-Thread count was 8 (of 8 available processors)
-
-Optimal solution found (tolerance 1.00e-04)
-Best objective 1.376000000000e+03, best bound 1.376000000000e+03, gap 0.0%
+Best objective 1.715000000000e+03, best bound 1.715000000000e+03, gap 0.0%
 
 Wrote requested result file 'H1\instance3\\Results3SG_Sol5.lp'
 

@@ -10,6 +10,7 @@
 clc;
 clearvars -except hotel_count instance_number;
 %% Read input file in and declare needed variables
+modus = 'R';
 name_change = 30;
 if instance_number >= 21
     name_change = 65;
@@ -147,3 +148,6 @@ save([folder 'H' num2str(hotel_count) '_OPT_Y' num2str(instance_number)],'result
 % result.dec_vars = dec_vars;
 % result.n_xdr = n_xdr;
 save('H1_OPT_Y1','result'); % Save result matrix
+modus='R';
+
+

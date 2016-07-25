@@ -154,10 +154,10 @@ for i=1:size(zit,2) % time
                 % To temperature
             A_temp(Ix1+1,Ix4) = A_temp(Ix1+1,Ix4)-(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix5);
             % "To" equation
-                % From temperature
-            A_temp(Ix2+1,Ix4) = A_temp(Ix2+1,Ix4)-(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix6);
                 % To temperature
-            A_temp(Ix2+1,Ix3) = A_temp(Ix2+1,Ix3)+(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix6);
+            A_temp(Ix2+1,Ix4) = A_temp(Ix2+1,Ix4)+(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix6);
+                % From temperature
+            A_temp(Ix2+1,Ix3) = A_temp(Ix2+1,Ix3)-(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix6);
         end
     end
     A_temp2 = [A_temp2; A_temp];
@@ -165,7 +165,9 @@ for i=1:size(zit,2) % time
     % Equations of propagation in time (differential approach)
     for k=0:hotel.nt-1
         l = fiix(dec_vars,['T' num2str(k) '_' num2str(i+1) '_']);
+        m = fiix(dec_vars,['T' num2str(k) '_' num2str(i) '_']);
         A_temp2(end-(hotel.nt-1)+k,l) = 1;
+        A_temp2(end-(hotel.nt-1)+k,m) = A_temp2(end-(hotel.nt-1)+k,m)-1;
     end
 end
 A = [A;A_temp2];
@@ -273,26 +275,26 @@ for i = 1:size(Rdn,1) % request
                    end
                elseif str2num(type2str(input_requests(i,1:3))) == 233
                    if str2num(type2str(input_rooms(j,:))) == 111
-                       disp('There is a bug in the code! Check Profit');
+                       disp('There is a bug in the code! Check Profit 233-111');
                         Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                         Revenue(Ix1) = Profit(2,1)*(input_requests(i,5)-input_requests(i,4));
                    elseif str2num(type2str(input_rooms(j,:))) == 233
                         Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                         Revenue(Ix1) = Profit(2,3)*(input_requests(i,5)-input_requests(i,4));
                    elseif str2num(type2str(input_rooms(j,:))) == 123
+                       disp('There is a bug in the code! Check Profit 233-123');
                         Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                         Revenue(Ix1) = Profit(2,2)*(input_requests(i,5)-input_requests(i,4));
                    end
                elseif str2num(type2str(input_requests(i,1:3))) == 123    
                    if str2num(type2str(input_rooms(j,:))) == 111
-                       disp('There is a bug in the code! Check Profit');
+                       disp('There is a bug in the code! Check Profit 123-111');
                         Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                         Revenue(Ix1) = Profit(3,1)*(input_requests(i,5)-input_requests(i,4));
                    elseif str2num(type2str(input_rooms(j,:))) == 233
                         Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                         Revenue(Ix1) = Profit(3,3)*(input_requests(i,5)-input_requests(i,4));
-                   elseif str2num(type2str(input_rooms(j,:))) == 123
-                       disp('There is a bug in the code! Check Profit'); 
+                   elseif str2num(type2str(input_rooms(j,:))) == 123 
                        Ix1 = fiix(dec_vars,['x' num2str(i-1) '_' num2str(j-1)]);
                        Revenue(Ix1) = Profit(3,2)*(input_requests(i,5)-input_requests(i,4)); 
                    end

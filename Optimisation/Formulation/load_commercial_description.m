@@ -13,7 +13,7 @@
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 % Number of client rooms, service rooms and dummy rooms
-load('input_rooms');
+load('input_rooms_small_hotel');
        
 nc = size(input_rooms,1);
 ns = 2;

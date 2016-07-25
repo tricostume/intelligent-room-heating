@@ -1,32 +1,32 @@
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:11:14
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:25:23
 
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:11:14
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:25:23
 
-Optimize a model with 1130 rows, 164 columns and 2596 nonzeros
+Optimize a model with 1214 rows, 175 columns and 2782 nonzeros
 Coefficient statistics:
   Matrix range    [1e+00, 4e+02]
   Objective range [2e+00, 4e+02]
   Bounds range    [1e+00, 1e+00]
   RHS range       [1e+00, 1e+03]
-Presolve removed 1063 rows and 18 columns
+Presolve removed 1146 rows and 23 columns
 Presolve time: 0.00s
-Presolved: 67 rows, 146 columns, 648 nonzeros
-Variable types: 0 continuous, 146 integer (146 binary)
+Presolved: 68 rows, 152 columns, 680 nonzeros
+Variable types: 0 continuous, 152 integer (152 binary)
 
-Root relaxation: objective 1.187000e+03, 57 iterations, 0.00 seconds
+Root relaxation: objective 1.313000e+03, 65 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-*    0     0               0    1187.0000000 1187.00000  0.00%     -    0s
+*    0     0               0    1313.0000000 1313.00000  0.00%     -    0s
 
-Explored 0 nodes (57 simplex iterations) in 0.00 seconds
+Explored 0 nodes (65 simplex iterations) in 0.00 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 1.187000000000e+03, best bound 1.187000000000e+03, gap 0.0%
+Best objective 1.313000000000e+03, best bound 1.313000000000e+03, gap 0.0%
 
 Wrote requested result file 'H1\instance6\\Results6SG_Sol5.lp'
 

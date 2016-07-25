@@ -128,7 +128,7 @@ b = [b;zeros(n_const3,1)];
 % and the K parameters must appear in order, this meaning first all K_0_i
 % then K_1_i and so on.
 
-A_temp = zeros(hotel.nt,size(A,2));
+A_temp = zeros(hotel.nt,size(dec_vars,2));
 A_temp2 = [];
 % Fill in respective b vector parallely
 %read_in_data = csvread('MyDesign_EnergyUse_comp.csv',1,1);
@@ -138,7 +138,7 @@ Te = hotel.ext_adj.temp(1:step_:size(zit,2)*step_,:);
 Tg = hotel.ground_adj.temp(1:step_:size(zit,2)*step_,:);
 T_rooms_0 = 17*ones(26,1);
 %b_temp = zeros(hotel.nt*(size(zit,2)+1),1);
-b_temp = [];
+b_temp = zeros(hotel.nt*size(zit,2),1);
 
 for i=1:size(zit,2) % time
     for j=1:size(hotel.parameters.K.names,1) %transmitances
@@ -150,22 +150,24 @@ for i=1:size(zit,2) % time
             Ix1 = str2double(Ix1);
             Ix3 = fiix(dec_vars,['T' num2str(Ix1) '_' num2str(i) '_']);
             Ix4 = fiix(hotel.parameters.c.names,['c_' num2str(Ix1) '_']); 
-            A_temp(Ix1+1,Ix3) = hotel.parameters.K.values(j)/hotel.parameters.c.values(Ix4);
-            b = [b;(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4)];
+            A_temp(Ix1+1,Ix3) = A_temp(Ix1+1,Ix3)+hotel.parameters.K.values(j)/hotel.parameters.c.values(Ix4);
+            %b_temp = [b_temp;(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4)];
+            b_temp((i-1)*(size(zit,2))+(Ix1+1)) = b_temp((i-1)*(size(zit,2))+(Ix1+1))+(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4);
+
             %b_temp = [b_temp;(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4)];
         end
         if strcmp(Ix1,'u')
             Ix2 = str2double(Ix2);
             Ix3 = fiix(dec_vars,['u' num2str(Ix2) '_' num2str(i) '_']);
             Ix4 = fiix(hotel.parameters.c.names,['c_' num2str(Ix2) '_']); 
-            A_temp(Ix2+1,Ix3) = -hotel.parameters.K.values(j)/hotel.parameters.c.values(Ix4);
+            A_temp(Ix2+1,Ix3) = -hotel.parameters.K.values(j)/(100*hotel.parameters.c.values(Ix4));
         end
         if strcmp(Ix2,'g')
-            Ix1 = str2double(Ix1);
+            Ix1 = str2double(Ix1); % room number
             Ix3 = fiix(dec_vars,['T' num2str(Ix1) '_' num2str(i) '_']);
             Ix4 = fiix(hotel.parameters.c.names,['c_' num2str(Ix1) '_']); 
             A_temp(Ix1+1,Ix3) = A_temp(Ix1+1,Ix3)+hotel.parameters.K.values(j)/hotel.parameters.c.values(Ix4);
-            b(end) = b(end)+(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4);
+            b_temp((i-1)*(size(zit,2))+(Ix1+1)) = b_temp((i-1)*(size(zit,2))+(Ix1+1))+(hotel.parameters.K.values(j)*Tg(i))/hotel.parameters.c.values(Ix4);
             %b_temp(end) = b_temp(end)+(hotel.parameters.K.values(j)*Te(i)+qS(i))/hotel.parameters.c.values(Ix4);;
         end
         if ~strcmp(Ix2,'e') && ~strcmp(Ix1,'u') && ~strcmp(Ix2,'g')
@@ -186,9 +188,9 @@ for i=1:size(zit,2) % time
             A_temp(Ix1+1,Ix4) = A_temp(Ix1+1,Ix4)-(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix5);
             % "To" equation
                 % From temperature
-            A_temp(Ix2+1,Ix4) = A_temp(Ix2+1,Ix4)-(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix6);
+            A_temp(Ix2+1,Ix4) = A_temp(Ix2+1,Ix4)+(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix6);
                 % To temperature
-            A_temp(Ix2+1,Ix3) = A_temp(Ix2+1,Ix3)+(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix6);
+            A_temp(Ix2+1,Ix3) = A_temp(Ix2+1,Ix3)-(hotel.parameters.K.values(j))/hotel.parameters.c.values(Ix6);
         end
     end
     A_temp2 = [A_temp2; A_temp];
@@ -196,10 +198,13 @@ for i=1:size(zit,2) % time
     % Equations of propagation in time (differential approach)
     for k=0:hotel.nt-1
         l = fiix(dec_vars,['T' num2str(k) '_' num2str(i+1) '_']);
+        m = fiix(dec_vars,['T' num2str(k) '_' num2str(i) '_']);
         A_temp2(end-(hotel.nt-1)+k,l) = 1;
+        A_temp2(end-(hotel.nt-1)+k,m) = A_temp2(end-(hotel.nt-1)+k,m)-1;
     end
 end
 A = [A;A_temp2];
+b = [b;b_temp];
 n_const4 = size(A,1)-n_const1-n_const2-n_const3;
 
 %% Control constraints (proportional) <<<<<<--- CHANGE FOR BIG HOTEL

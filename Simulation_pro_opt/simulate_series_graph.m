@@ -64,12 +64,16 @@ for i=1:nx-12
     ax(i) = subplot(4,3,i);
     plot(20*u_rooms(i,1:samples),'g--')
     hold on
-    plot(26*u_cooling(i,1:samples),'m--')
+    %plot(26*u_cooling(i,1:samples),'m--')
     plot(time,X(i,1:mod_samples),'r')
     plot(T_rooms(i,1:samples))
     title(['Room' num2str(i-1)])
     ylabel('Temp[°]')
 end
+hl = legend('T_{sp}','T^_{i,t}','T_{i,t}');
+set(hl, 'interpreter', 'tex')
+print('Sys_ID','-dpng')
+
 %linkaxes (ax,'x');
 %linkaxes (ax,'y');
 end

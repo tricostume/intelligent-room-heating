@@ -1,64 +1,32 @@
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:17:28
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:27:33
 
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:17:28
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:27:33
 
-Optimize a model with 2625 rows, 710 columns and 6814 nonzeros
+Optimize a model with 2762 rows, 722 columns and 7147 nonzeros
 Coefficient statistics:
   Matrix range    [6e-08, 1e+03]
   Objective range [1e+00, 1e+00]
   Bounds range    [1e+00, 1e+00]
-  RHS range       [6e-06, 1e+03]
-Presolve removed 2402 rows and 481 columns
+  RHS range       [6e-06, 2e+03]
+Presolve removed 2536 rows and 487 columns
 Presolve time: 0.00s
-Presolved: 223 rows, 229 columns, 968 nonzeros
-Variable types: 229 continuous, 0 integer (0 binary)
+Presolved: 226 rows, 235 columns, 970 nonzeros
+Variable types: 235 continuous, 0 integer (0 binary)
 
-Root relaxation: objective 1.663864e+02, 272 iterations, 0.02 seconds
+Root relaxation: objective 1.897102e+01, 224 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-*    0     0               0     166.3863814  166.38638  0.00%     -    0s
+*    0     0               0      18.9710219   18.97102  0.00%     -    0s
 
-Explored 0 nodes (272 simplex iterations) in 0.02 seconds
+Explored 0 nodes (224 simplex iterations) in 0.02 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 1.663863814322e+02, best bound 1.663863814322e+02, gap 0.0%
-
-Wrote requested result file 'H1\instance11\\Results11EC_Sol4.lp'
-
-
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:22:16
-
-
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:22:16
-
-Optimize a model with 2625 rows, 710 columns and 6814 nonzeros
-Coefficient statistics:
-  Matrix range    [6e-08, 1e+03]
-  Objective range [1e+00, 1e+00]
-  Bounds range    [1e+00, 1e+00]
-  RHS range       [6e-06, 1e+03]
-Presolve removed 2402 rows and 481 columns
-Presolve time: 0.00s
-Presolved: 223 rows, 229 columns, 968 nonzeros
-Variable types: 229 continuous, 0 integer (0 binary)
-
-Root relaxation: objective 1.663864e+02, 272 iterations, 0.00 seconds
-
-    Nodes    |    Current Node    |     Objective Bounds      |     Work
- Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-
-*    0     0               0     166.3863814  166.38638  0.00%     -    0s
-
-Explored 0 nodes (272 simplex iterations) in 0.02 seconds
-Thread count was 8 (of 8 available processors)
-
-Optimal solution found (tolerance 1.00e-04)
-Best objective 1.663863814322e+02, best bound 1.663863814322e+02, gap 0.0%
+Best objective 1.897102185278e+01, best bound 1.897102185278e+01, gap 0.0%
 
 Wrote requested result file 'H1\instance11\\Results11EC_Sol4.lp'
 

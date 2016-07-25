@@ -12,6 +12,7 @@
 clc;
 clearvars -except hotel_count instance_number solutions_number folder;
 %% Read input file in and declare needed variables
+modus='SG';
 name_change = 30;
 if instance_number >= 21
     name_change = 65;

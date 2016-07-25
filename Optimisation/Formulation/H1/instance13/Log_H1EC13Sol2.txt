@@ -1,33 +1,32 @@
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:24:40
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:29:31
 
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:24:40
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:29:31
 
-Optimize a model with 2385 rows, 722 columns and 6284 nonzeros
+Optimize a model with 2602 rows, 742 columns and 6819 nonzeros
 Coefficient statistics:
   Matrix range    [6e-08, 1e+03]
   Objective range [1e+00, 1e+00]
   Bounds range    [1e+00, 1e+00]
   RHS range       [6e-06, 2e+03]
-Found heuristic solution: objective 909.57
-Presolve removed 2147 rows and 476 columns
-Presolve time: 0.02s
-Presolved: 238 rows, 246 columns, 1043 nonzeros
-Variable types: 246 continuous, 0 integer (0 binary)
+Presolve removed 2361 rows and 491 columns
+Presolve time: 0.00s
+Presolved: 241 rows, 251 columns, 1044 nonzeros
+Variable types: 251 continuous, 0 integer (0 binary)
 
-Root relaxation: objective 1.861801e+02, 288 iterations, 0.00 seconds
+Root relaxation: objective 1.965404e+01, 249 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-*    0     0               0     186.1800894  186.18009  0.00%     -    0s
+*    0     0               0      19.6540406   19.65404  0.00%     -    0s
 
-Explored 0 nodes (288 simplex iterations) in 0.02 seconds
+Explored 0 nodes (249 simplex iterations) in 0.02 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 1.861800893776e+02, best bound 1.861800893776e+02, gap 0.0%
+Best objective 1.965404060946e+01, best bound 1.965404060946e+01, gap 0.0%
 
 Wrote requested result file 'H1\instance13\\Results13EC_Sol2.lp'
 

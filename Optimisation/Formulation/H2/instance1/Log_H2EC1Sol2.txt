@@ -62,3 +62,98 @@ Best objective 1.408258878070e+02, best bound 1.408258878070e+02, gap 0.0%
 
 Wrote requested result file 'H2\instance1\\Results1EC_Sol2.lp'
 
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 15:57:30
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 15:57:30
+
+Optimize a model with 5819 rows, 947 columns and 14225 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-03, 1e+03]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+03]
+Presolve removed 26 rows and 479 columns
+Presolve time: 0.00s
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds
+Thread count was 1 (of 8 available processors)
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+Wrote requested result file 'H2\instance1\\Results1EC_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:29:43
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:29:43
+
+Optimize a model with 5819 rows, 947 columns and 14225 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-03, 1e+03]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+03]
+Presolve removed 5819 rows and 947 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.02 seconds
+Thread count was 1 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.700000000000e+01, best bound 2.700000000000e+01, gap 0.0%
+
+Wrote requested result file 'H2\instance1\\Results1EC_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:32:23
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:32:23
+
+Optimize a model with 5819 rows, 947 columns and 14225 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-03, 1e+03]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+03]
+Presolve removed 5819 rows and 947 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds
+Thread count was 1 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.700000000000e+01, best bound 2.700000000000e+01, gap 0.0%
+
+Wrote requested result file 'H2\instance1\\Results1EC_Sol2.lp'
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:38:15
+
+
+Gurobi 6.5.2 (win64) logging started 07/24/16 16:38:15
+
+Optimize a model with 5819 rows, 947 columns and 14225 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-03, 1e+03]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+03]
+Presolve removed 5819 rows and 947 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds
+Thread count was 1 (of 8 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.700000000000e+01, best bound 2.700000000000e+01, gap 0.0%
+
+Wrote requested result file 'H2\instance1\\Results1EC_Sol2.lp'
+

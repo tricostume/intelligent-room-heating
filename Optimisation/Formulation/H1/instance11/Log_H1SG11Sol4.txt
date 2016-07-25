@@ -1,64 +1,32 @@
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:17:02
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:27:08
 
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:17:02
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:27:08
 
-Optimize a model with 1825 rows, 266 columns and 4172 nonzeros
+Optimize a model with 1962 rows, 278 columns and 4466 nonzeros
 Coefficient statistics:
   Matrix range    [1e+00, 3e+02]
   Objective range [2e+00, 3e+02]
   Bounds range    [1e+00, 1e+00]
-  RHS range       [1e+00, 1e+03]
-Presolve removed 1703 rows and 45 columns
-Presolve time: 0.00s
-Presolved: 122 rows, 221 columns, 1001 nonzeros
-Variable types: 0 continuous, 221 integer (221 binary)
-
-Root relaxation: objective 1.475000e+03, 96 iterations, 0.02 seconds
-
-    Nodes    |    Current Node    |     Objective Bounds      |     Work
- Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-
-*    0     0               0    1475.0000000 1475.00000  0.00%     -    0s
-
-Explored 0 nodes (96 simplex iterations) in 0.02 seconds
-Thread count was 8 (of 8 available processors)
-
-Optimal solution found (tolerance 1.00e-04)
-Best objective 1.475000000000e+03, best bound 1.475000000000e+03, gap 0.0%
-
-Wrote requested result file 'H1\instance11\\Results11SG_Sol4.lp'
-
-
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:21:50
-
-
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:21:50
-
-Optimize a model with 1825 rows, 266 columns and 4172 nonzeros
-Coefficient statistics:
-  Matrix range    [1e+00, 3e+02]
-  Objective range [2e+00, 3e+02]
-  Bounds range    [1e+00, 1e+00]
-  RHS range       [1e+00, 1e+03]
-Presolve removed 1703 rows and 45 columns
+  RHS range       [1e+00, 2e+03]
+Presolve removed 1835 rows and 33 columns
 Presolve time: 0.02s
-Presolved: 122 rows, 221 columns, 1001 nonzeros
-Variable types: 0 continuous, 221 integer (221 binary)
+Presolved: 127 rows, 245 columns, 1146 nonzeros
+Variable types: 0 continuous, 245 integer (245 binary)
 
-Root relaxation: objective 1.475000e+03, 96 iterations, 0.00 seconds
+Root relaxation: objective 1.627000e+03, 109 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-*    0     0               0    1475.0000000 1475.00000  0.00%     -    0s
+*    0     0               0    1627.0000000 1627.00000  0.00%     -    0s
 
-Explored 0 nodes (96 simplex iterations) in 0.02 seconds
+Explored 0 nodes (109 simplex iterations) in 0.02 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 1.475000000000e+03, best bound 1.475000000000e+03, gap 0.0%
+Best objective 1.627000000000e+03, best bound 1.627000000000e+03, gap 0.0%
 
 Wrote requested result file 'H1\instance11\\Results11SG_Sol4.lp'
 

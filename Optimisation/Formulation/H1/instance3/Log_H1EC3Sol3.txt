@@ -1,64 +1,32 @@
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 20:28:52
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:24:16
 
 
-Gurobi 6.5.2 (win64) logging started 07/22/16 20:28:52
+Gurobi 6.5.2 (win64) logging started 07/24/16 17:24:16
 
-Optimize a model with 1217 rows, 588 columns and 3366 nonzeros
+Optimize a model with 1310 rows, 610 columns and 3651 nonzeros
 Coefficient statistics:
   Matrix range    [6e-08, 1e+03]
   Objective range [1e+00, 1e+00]
   Bounds range    [1e+00, 1e+00]
-  RHS range       [6e-06, 1e+03]
-Presolve removed 1010 rows and 375 columns
-Presolve time: 0.02s
-Presolved: 207 rows, 213 columns, 948 nonzeros
-Variable types: 213 continuous, 0 integer (0 binary)
+  RHS range       [6e-06, 2e+03]
+Presolve removed 1105 rows and 396 columns
+Presolve time: 0.00s
+Presolved: 205 rows, 214 columns, 933 nonzeros
+Variable types: 214 continuous, 0 integer (0 binary)
 
-Root relaxation: objective 1.528567e+02, 227 iterations, 0.00 seconds
-
-    Nodes    |    Current Node    |     Objective Bounds      |     Work
- Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-
-*    0     0               0     152.8566876  152.85669  0.00%     -    0s
-
-Explored 0 nodes (227 simplex iterations) in 0.02 seconds
-Thread count was 8 (of 8 available processors)
-
-Optimal solution found (tolerance 1.00e-04)
-Best objective 1.528566875718e+02, best bound 1.528566875718e+02, gap 0.0%
-
-Wrote requested result file 'H1\instance3\\Results3EC_Sol3.lp'
-
-
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:05:22
-
-
-Gurobi 6.5.2 (win64) logging started 07/22/16 21:05:22
-
-Optimize a model with 1217 rows, 588 columns and 3366 nonzeros
-Coefficient statistics:
-  Matrix range    [6e-08, 1e+03]
-  Objective range [1e+00, 1e+00]
-  Bounds range    [1e+00, 1e+00]
-  RHS range       [6e-06, 1e+03]
-Presolve removed 1010 rows and 375 columns
-Presolve time: 0.02s
-Presolved: 207 rows, 213 columns, 948 nonzeros
-Variable types: 213 continuous, 0 integer (0 binary)
-
-Root relaxation: objective 1.528567e+02, 227 iterations, 0.00 seconds
+Root relaxation: objective 2.081443e+01, 219 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-*    0     0               0     152.8566876  152.85669  0.00%     -    0s
+*    0     0               0      20.8144301   20.81443  0.00%     -    0s
 
-Explored 0 nodes (227 simplex iterations) in 0.02 seconds
+Explored 0 nodes (219 simplex iterations) in 0.00 seconds
 Thread count was 8 (of 8 available processors)
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 1.528566875718e+02, best bound 1.528566875718e+02, gap 0.0%
+Best objective 2.081443008921e+01, best bound 2.081443008921e+01, gap 0.0%
 
 Wrote requested result file 'H1\instance3\\Results3EC_Sol3.lp'
 
