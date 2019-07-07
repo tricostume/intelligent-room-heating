@@ -1,4 +1,4 @@
-# Intelligent Hotel Reservations Assignment to Rooms in Pursuit of Energy Usage Miniization
+# Intelligent Hotel Reservations Assignment to Rooms in Pursuit of Energy Usage Minimization
 
 This project is a generic development sponsored by the University of Genove in Italy. The main idea relies in assigning clients of a hotel to specific rooms in it ensuring heating energy usage minimization by the principle of heat concentration in specific areas of the hotel.
 
